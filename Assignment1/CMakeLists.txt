@@ -1,0 +1,10 @@
+CMAKE_MINIMUM_REQUIRED (VERSION 3.0)
+PROJECT (Assignment1)
+
+SET (CMAKE_CXX_STANDARD 11)
+
+ADD_LIBRARY(geometry geometry.cpp)
+
+ADD_EXECUTABLE(main main.cpp)
+
+TARGET_LINK_LIBRARIES (main geometry)
