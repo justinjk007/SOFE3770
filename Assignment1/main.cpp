@@ -4,11 +4,13 @@
 #include <iostream>
 #include <vector>
 #include "geometry.hpp"
+#include <chrono> // This is for mesureing thread running time
 
 using namespace std;
 
 int main()
 {
+        auto start = chrono::high_resolution_clock::now(); // Start clock
 	// Declaring and Initializng variables
 	int polygon_Vertices;
 	vector<int> x_Points;
@@ -62,11 +64,13 @@ int main()
 	// Compare each line segment withing the polygon skipping the first and last comparison (already compared as sides)
 	//additionally, if a segment is larger than the current largest segment check for intersection.
 
+	auto finish = chrono::high_resolution_clock::now(); // Stop clock
+        chrono::duration<double> elapsed = finish - start; // Mesure time elapsed
+        cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
 
 	// keeps window open
 	int dummy;
-	cin >> dummy; 
-	
+	cin >> dummy;
+
 	return 0;
 }
-
