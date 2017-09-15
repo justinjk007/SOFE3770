@@ -1,7 +1,6 @@
 // sofe3770uAssign1.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <iostream>
 #include <vector>
 #include "geometry.hpp"
@@ -11,9 +10,9 @@ using namespace std;
 int main()
 {
 	// Declaring and Initializng variables
-	int polygonVertices;
-	vector<int> xPoints;
-	vector<int> yPoints;
+	int polygon_Vertices;
+	vector<int> x_Points;
+	vector<int> y_Points;
 
 	/*
 	Point a;
@@ -23,12 +22,12 @@ int main()
 	*/
 
 	cout << "Please enter the number of Vertices (3 < _ < 200): ";
-	cin >> polygonVertices;
+	cin >> polygon_Vertices;
 	// Error checking for incorrect input
-	while (polygonVertices > 200 || polygonVertices < 3)
+	while (polygon_Vertices > 200 || polygon_Vertices < 3)
 	{
 		cout << "Please enter a valid number: ";
-		cin >> polygonVertices;
+		cin >> polygon_Vertices;
 	}
 	/*for (int xTemp, yTemp; cin >> xTemp >> yTemp;)
 	{
@@ -39,24 +38,29 @@ int main()
 	cout << "Please enter integers equal to or less than 10^6.";
 	for (int count = 0; count < 7; count++)
 	{
-		int xTemp;
-		cin >> xTemp;
-		xPoints.push_back(xTemp);
-		if (xTemp > 1000000)
+		int x_Temp;
+		cin >> x_Temp;
+		x_Points.push_back(x_Temp);
+		if (x_Temp > 1000000)
 		{
 			cout << "Error";
-			cin >> xTemp;
+			cin >> x_Temp;
 		}
-		int yTemp;
-		cin >> yTemp;
-		yPoints.push_back(yTemp);
-		if (yTemp > 1000000)
+		int y_Temp;
+		cin >> y_Temp;
+		y_Points.push_back(y_Temp);
+		if (y_Temp > 1000000)
 		{
 			cout << "Error";
-			cin >> yTemp;
+			cin >> y_Temp;
 		}
 	}
 
+	// Compare all sides of the polygon and determine largest of the sides
+
+
+	// Compare each line segment withing the polygon skipping the first and last comparison (already compared as sides)
+	//additionally, if a segment is larger than the current largest segment check for intersection.
 
 
 	// keeps window open
