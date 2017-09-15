@@ -13,5 +13,5 @@ TEST_CASE("Testing Euclidean distance method")
     Point d(13,4000);
 
     REQUIRE(getEuclideanDistance(a, b) == 1);
-    REQUIRE(getEuclideanDistance(d, c) == Approx(3992.004509));
+    REQUIRE(getEuclideanDistance(d, c) == Approx(3992.004509).epsilon(0.0001)); // Epsilon is tolerance in %
 }
