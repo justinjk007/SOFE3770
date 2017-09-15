@@ -6,5 +6,7 @@ SET (CMAKE_CXX_STANDARD 11)
 ADD_LIBRARY(geometry geometry.cpp)
 
 ADD_EXECUTABLE(main main.cpp)
+ADD_EXECUTABLE(tests tests.cpp)
 
 TARGET_LINK_LIBRARIES (main geometry)
+TARGET_LINK_LIBRARIES (tests geometry)

@@ -5,17 +5,17 @@
 class Point
 {
    public:
-    double x;
-    double y;
+    int x;
+    int y;
     Point()
     {
 	/**
 	 * This is the default constructor
 	 */
-        this->x = 0.0;
-        this->y = 0.0;
+        this->x = 0;
+        this->y = 0;
     }
-    Point(double x_cord, double y_cord)
+    Point(int x_cord, int y_cord)
     {
 	/**
 	 * This constructor creates objects with the values passed on
