@@ -6,7 +6,6 @@
 
 class Point
 {
-<<<<<<< HEAD
 public:
 	int x;
 	int y;
@@ -27,7 +26,7 @@ public:
 		this->x = x_cord;
 		this->y = y_cord;
 	}
-=======
+
    public:
     int x;
     int y;
@@ -49,13 +48,11 @@ public:
         this->x = x_cord;
         this->y = y_cord;
     }
->>>>>>> 415bb857038d5367f1faa18daea3d0cbeb54cf9f
 };
 
 // Make Line class here.
 class Segment
 {
-<<<<<<< HEAD
 public:
 	Point start;
 	Point end;
@@ -76,7 +73,6 @@ public:
 		this->start = a;
 		this->end = b;
 	}
-=======
    public:
     Point start;
     Point end;
@@ -87,7 +83,6 @@ public:
         this->start       = default_set;
         this->end         = default_set;
     }
->>>>>>> 415bb857038d5367f1faa18daea3d0cbeb54cf9f
 
     Segment(Point a, Point b)
     {

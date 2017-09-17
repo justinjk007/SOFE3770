@@ -1,6 +1,6 @@
 #include "geometry.hpp"
 #include <cmath>
-#include <windef.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -25,19 +25,18 @@ std::ostream& operator<<(std::ostream& os, const Point& point)
 	return os;
 }
 
-<<<<<<< HEAD
 double Segment::compareSegments(Segment a, Segment b)
 {
-	double a_length = getEuclideanDistance(a.start, a.end);
-	double b_length = getEuclideanDistance(b.start, b.end);
+	double a_length = a.getLength();
+	double b_length = b.getLength();
 	double largest_length = max(a_length, b_length);
 	return largest_length;
-=======
+}
+
 double Segment::getLength() {
     /**
      * Returns the length of the line given
      */
     double length = getEuclideanDistance(this->start, this->end);
     return length;
->>>>>>> 415bb857038d5367f1faa18daea3d0cbeb54cf9f
 }
