@@ -1,4 +1,4 @@
-// sofe3770uAssign1.cpp : Defines the entry point for the console application.
+// main.cpp : Defines the entry point for the console application.
 
 
 #include <chrono>  // This is for measuring thread running time
