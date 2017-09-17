@@ -25,7 +25,7 @@ std::ostream& operator<<(std::ostream& os, const Point& point)
 	return os;
 }
 
-double Segment::compareSegments(Segment a, Segment b)
+double compareSegments(Segment a, Segment b)
 {
 	double a_length = a.getLength();
 	double b_length = b.getLength();
