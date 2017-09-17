@@ -17,14 +17,17 @@ double getEuclideanDistance(Point a, Point b)
 
 std::ostream& operator<<(std::ostream& os, const Point& point)
 {
+    /**
+     * Implements the output operator for the Point class.
+     */
 	os << "(" << point.x << ',' << point.y << ")" << endl;
 	return os;
 }
 
-
-
-double compareSegment(Point a, Point b)
-{
-
-	return 0.0;
+double Segment::getLength() {
+    /**
+     * Returns the length of the line given
+     */
+    double length = getEuclideanDistance(this->start, this->end);
+    return length;
 }
