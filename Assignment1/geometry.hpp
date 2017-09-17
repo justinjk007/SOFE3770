@@ -8,7 +8,7 @@ class Point
 public:
 	int x;
 	int y;
-	friend std::ostream& operator<<(std::ostream& os, const Point& point);  // Define os << operator fo Point
+	friend std::ostream& operator<<(std::ostream& os, const Point& point);  // Define os << operator for Point
 	Point()
 	{
 		/**
@@ -20,7 +20,7 @@ public:
 	Point(int x_cord, int y_cord)
 	{
 		/**
-		 * This constructor creates objects with the values passed on
+		 * This constructor creates objects with the values passed in
 		 */
 		this->x = x_cord;
 		this->y = y_cord;
@@ -34,8 +34,10 @@ public:
 	Point start;
 	Point end;
 
-	// put functions here
+	// put prototype functions here
+	double compareSegments(Segment a, Segment b); 
 
+	// Constructors are defined in headers
 	Segment()
 	{
 		Point default_set = { 0, 0 };
