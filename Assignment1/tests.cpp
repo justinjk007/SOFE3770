@@ -22,8 +22,9 @@ TEST_CASE("Testing Segment::getLength()")
 {
 	Point c(7, 8);
 	Point d(13, 4000);
+	double test_length = getEuclideanDistance(c, d);
 
-	Segment line1(c, d);
+	Segment line1(c, d, test_length);
 
 	REQUIRE(line1.getLength() == Approx(3992.004509).epsilon(0.0001));  // Epsilon is tolerance
 }
@@ -36,8 +37,11 @@ TEST_CASE("Testing compareSegments()")
 	Point b1;
 	Point b2(3, 0);
 
-	Segment begin(a1, a2);
-	Segment other(b1, b2);
+	double test_length_a = getEuclideanDistance(a1, a2);
+	double test_length_b = getEuclideanDistance(b1, b2);
 
-	REQUIRE(compareSegments(begin, other) == Approx(3).epsilon(0.0001));
+	Segment begin(a1, a2, test_length_a);
+	Segment other(b1, b2, test_length_b);
+
+	REQUIRE(compareSegments(begin, other) == other);
 }

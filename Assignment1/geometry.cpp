@@ -18,25 +18,35 @@ double getEuclideanDistance(Point a, Point b)
 
 std::ostream& operator<<(std::ostream& os, const Point& point)
 {
-    /**
-     * Implements the output operator for the Point class.
-     */
+	/**
+	 * Implements the output operator for the Point class.
+	 */
 	os << "(" << point.x << ',' << point.y << ")" << endl;
 	return os;
 }
 
-double compareSegments(Segment a, Segment b)
+Segment compareSegments(Segment a, Segment b)
 {
-	double a_length = a.getLength();
-	double b_length = b.getLength();
-	double largest_length = max(a_length, b_length);
-	return largest_length;
+	if (a.getLength() >= b.getLength())
+		return a;
+	else
+		return b;
 }
 
-double Segment::getLength() {
-    /**
-     * Returns the length of the line given
-     */
-    double length = getEuclideanDistance(this->start, this->end);
-    return length;
+double Segment::getLength()
+{
+	/**
+	 * Returns the length of the line given
+	 */
+	return this->segment_length;
+}
+
+Segment findBiggestEdge(std::vector<Segment> all_edges)
+{
+	Segment current_biggest = all_edges[1];
+	for (auto &segment : all_edges) //access vector by reference to avoid copying?
+	{
+		current_biggest = (compareSegments(current_biggest, segment));
+	}
+	return current_biggest;
 }
