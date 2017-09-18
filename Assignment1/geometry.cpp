@@ -1,6 +1,5 @@
 #include "geometry.hpp"
 #include <algorithm>
-#include <cmath>
 
 using namespace std;
 
@@ -49,7 +48,7 @@ double Segment::getLength()
     /**
      * Returns the length of the line given
      */
-    return this->segment_length;
+    return this->length;
 }
 
 Segment findBiggestEdge(std::vector<Segment> all_edges)
@@ -72,15 +71,17 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
      */
 
     vector<Segment> diagonals;  // This will contain all the diagonals generated
-    for (auto& point : polygon) {
+    for (vector<Point>::iterator it1 = polygon.begin(); it1 != polygon.end(); it1++) {
+	Point one = *it1;
+        vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
+        if (++it1 != polygon.end())
+            it1++;  // Skip a point
+        else
+            break;  // We are at the last point, all diagonals are made
+        for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
+        }
+        it1 = temp_it;  // Reset it11 to its begining position
     }
-    // Start at point 0
-
-    // Skip the next point
-
-    // Go up to nth point.
-
-    // Repeat this for all points. Building up a vector of segments
 
     return diagonals;
 }

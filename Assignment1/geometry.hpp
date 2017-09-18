@@ -1,6 +1,7 @@
 #ifndef GEOMETRY_HPP  // These are file guards
 #define GEOMETRY_HPP
 
+#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -33,27 +34,35 @@ public:
 // Make Line class here.
 class Segment
 {
-   private:
-    double segment_length;
+private:
+    double length;
 
-   public:
+public:
     Point start;
     Point end;
     double getLength();                                       // Returns the length of the line
     friend ostream& operator<<(ostream& os, const Segment&);  // define os << operator for Segment
     Segment()
     {
-        Point default_set    = {0, 0};
-        this->start          = default_set;
-        this->end            = default_set;
-        this->segment_length = 0;
+        Point default_set = {0, 0};
+        this->start       = default_set;
+        this->end         = default_set;
+        this->length      = 0;
     }
-
+    Segment(Point a, Point b)
+    {
+        this->start  = a;
+        this->end    = b;
+        double diff1 = a.x - b.x;
+        double diff2 = a.y - b.y;
+        double sum   = pow(diff1, 2) + pow(diff2, 2);
+        this->length = sqrt(sum);
+    }
     Segment(Point a, Point b, double c)
     {
-        this->start          = a;
-        this->end            = b;
-        this->segment_length = c;
+        this->start  = a;
+        this->end    = b;
+        this->length = c;
     }
 };
 
