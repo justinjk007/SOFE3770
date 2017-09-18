@@ -5,23 +5,23 @@ using namespace std;
 
 double getEuclideanDistance(Point a, Point b)
 {
-	/**
-	 * This method returns the distance between two points.
-	 */
-	double diff1 = a.x - b.x;
-	double diff2 = a.y - b.y;
-	double sum = pow(diff1, 2) + pow(diff2, 2);
-	double distance = sqrt(sum);
-	return distance;
+    /**
+     * This method returns the distance between two points.
+     */
+    double diff1    = a.x - b.x;
+    double diff2    = a.y - b.y;
+    double sum      = pow(diff1, 2) + pow(diff2, 2);
+    double distance = sqrt(sum);
+    return distance;
 }
 
 std::ostream& operator<<(std::ostream& os, const Point& point)
 {
-	/**
-	 * Implements the output operator for the Point class.
-	 */
-	os << "(" << point.x << ',' << point.y << ")" << endl;
-	return os;
+    /**
+     * Implements the output operator for the Point class.
+     */
+    os << "(" << point.x << ',' << point.y << ")" << endl;
+    return os;
 }
 
 std::ostream& operator<<(std::ostream& os, const Segment& segment)
@@ -37,13 +37,13 @@ std::ostream& operator<<(std::ostream& os, const Segment& segment)
 
 Segment compareSegments(Segment a, Segment b)
 {
-	/*
-	* Returns the Segment object with the largest length.
-	*/
-	if (a.getLength() >= b.getLength())
-		return a;
-	else
-		return b;
+    /*
+     * Returns the Segment object with the largest length.
+     */
+    if (a.getLength() >= b.getLength())
+        return a;
+    else
+        return b;
 }
 
 double Segment::getLength()
@@ -56,57 +56,58 @@ double Segment::getLength()
 
 Segment findBiggestEdge(std::vector<Segment> all_edges)
 {
-	/**
-	* Returns the biggest edge of the polygon as a segment object.
-	*/
-	Segment current_biggest = all_edges[1];
-	for (auto& segment : all_edges)  // access vector by reference to avoid copying?
-	{
-		current_biggest = (compareSegments(current_biggest, segment));
-	}
-	return current_biggest;
+    /**
+     * Returns the biggest edge of the polygon as a segment object.
+     */
+    Segment current_biggest = all_edges[1];
+    for (auto& segment : all_edges)  // access vector by reference to avoid copying?
+    {
+        current_biggest = (compareSegments(current_biggest, segment));
+    }
+    return current_biggest;
 }
 
 std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
 {
-	/**
-	* Generate and return a list segments that represents all the
-	* possible diagonals that can be generated from the given list of
-	* points which make up the polygon. The points are expected to be
-	* sorted counterclockwise and more than 3 in size(No diagonals
-	* otherwise).
-	*/
+    /**
+     * Generate and return a list segments that represents all the
+     * possible diagonals that can be generated from the given list of
+     * points which make up the polygon. The points are expected to be
+     * sorted counterclockwise and more than 3 in size(No diagonals
+     * otherwise).
+     */
 
-	vector<Segment> diagonals;  // This will contain all the diagonals generated
-	for (vector<Point>::iterator it1 = polygon.begin(); it1 != polygon.end(); it1++) {
-		Point one = *it1;
-		vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
-		if (++it1 != polygon.end())
-			it1++;  // Skip a point
-		else
-			break;  // We are at the last point, all diagonals are made
-		for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
-		}
-		it1 = temp_it;  // Reset it11 to its begining position
-	}
+    vector<Segment> diagonals;  // This will contain all the diagonals generated
+    for (vector<Point>::iterator it1 = polygon.begin(); it1 != polygon.end(); it1++) {
+        Point point_one                 = *it1;
+        vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
+        if (++it1 != polygon.end())
+            it1++;  // Skip a point
+        else
+            break;  // We are at the last point, all diagonals are made
+        for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
+            Segment diagonal_line = {point_one, *it2};
+            diagonals.push_back(diagonal_line);
+        }
+        it1 = temp_it;  // Reset it11 to its begining position
+    }
 
-	return diagonals;
+    return diagonals;
 }
 
 std::vector<Segment> generateEdges(std::vector<Point> all_points)
 {
-	vector<Segment> polygon;
-	Point current = all_points[0];
-	Point next;
-	// Generates edges except for the last edge of the polygon
-	for (int count = 1; count < all_points.size(); count++)
-	{
-		next = all_points[count];
-		polygon.push_back(Segment(current, next));
-		current = all_points[count];
-	}
-	// Creates the last segment (connects to starting point)
-	next = all_points[0];
-	polygon.push_back(Segment(current, next));
-	return polygon;
+    vector<Segment> polygon;
+    Point current = all_points[0];
+    Point next;
+    // Generates edges except for the last edge of the polygon
+    for (int count = 1; count < all_points.size(); count++) {
+        next = all_points[count];
+        polygon.push_back(Segment(current, next));
+        current = all_points[count];
+    }
+    // Creates the last segment (connects to starting point)
+    next = all_points[0];
+    polygon.push_back(Segment(current, next));
+    return polygon;
 }
