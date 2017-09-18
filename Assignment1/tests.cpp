@@ -45,3 +45,14 @@ TEST_CASE("Testing compareSegments()")
 
 	REQUIRE(compareSegments(begin, other) == other);
 }
+
+TEST_CASE("Integration test")
+{
+    /**
+     * As per the assignment document
+     * Answer1 should be 76.157731059
+     * Answer2 should be 4510.149110617
+     */
+    std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}};
+    std::vector<Point> input2 = {{0, 2017}, {-2017, -2017}, {2017, 0}};
+}
