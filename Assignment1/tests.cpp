@@ -22,9 +22,8 @@ TEST_CASE("Testing Segment::getLength()")
 {
 	Point c(7, 8);
 	Point d(13, 4000);
-	double test_length = getEuclideanDistance(c, d);
 
-	Segment line1(c, d, test_length);
+	Segment line1(c, d);
 
 	REQUIRE(line1.getLength() == Approx(3992.004509).epsilon(0.0001));  // Epsilon is tolerance
 }
@@ -37,11 +36,8 @@ TEST_CASE("Testing compareSegments()")
 	Point b1;
 	Point b2(3, 0);
 
-	double test_length_a = getEuclideanDistance(a1, a2);
-	double test_length_b = getEuclideanDistance(b1, b2);
-
-	Segment begin(a1, a2, test_length_a);
-	Segment other(b1, b2, test_length_b);
+	Segment begin(a1, a2);
+	Segment other(b1, b2);
 
 	Segment ans = compareSegments(begin, other);
 
@@ -50,11 +46,11 @@ TEST_CASE("Testing compareSegments()")
 
 TEST_CASE("Integration test")
 {
-    /**
-     * As per the assignment document
-     * Answer1 should be 76.157731059
-     * Answer2 should be 4510.149110617
-     */
-    std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}};
-    std::vector<Point> input2 = {{0, 2017}, {-2017, -2017}, {2017, 0}};
+	/**
+	 * As per the assignment document
+	 * Answer1 should be 76.157731059
+	 * Answer2 should be 4510.149110617
+	 */
+	std::vector<Point> input1 = { {0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50} };
+	std::vector<Point> input2 = { {0, 2017}, {-2017, -2017}, {2017, 0} };
 }

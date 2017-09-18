@@ -1,6 +1,5 @@
 #include "geometry.hpp"
 #include <algorithm>
-#include <cmath>
 
 using namespace std;
 
@@ -25,6 +24,17 @@ std::ostream& operator<<(std::ostream& os, const Point& point)
 	return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const Segment& segment)
+{
+    /**
+     * Implements the output operator for the Segment class.
+     */
+    os << "(" << segment.start.x << ',' << segment.start.y << ")";
+    os << " ------ ";
+    os << "(" << segment.end.x << ',' << segment.end.y << ")" << endl;
+    return os;
+}
+
 Segment compareSegments(Segment a, Segment b)
 {
 	/*
@@ -38,10 +48,10 @@ Segment compareSegments(Segment a, Segment b)
 
 double Segment::getLength()
 {
-	/**
-	 * Returns the length of the line given
-	 */
-	return this->segment_length;
+    /**
+     * Returns the length of the line given
+     */
+    return this->length;
 }
 
 Segment findBiggestEdge(std::vector<Segment> all_edges)
@@ -60,19 +70,27 @@ Segment findBiggestEdge(std::vector<Segment> all_edges)
 std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
 {
 	/**
-	 * Generate and return a list segments that represents all the
-	 * possible diagonals that can be generated from the given list of
-	 * points which make up the polygon. The points are expected to be
-	 * sorted counterclockwise.
-	 */
+	* Generate and return a list segments that represents all the
+	* possible diagonals that can be generated from the given list of
+	* points which make up the polygon. The points are expected to be
+	* sorted counterclockwise and more than 3 in size(No diagonals
+	* otherwise).
+	*/
 
-	 // Start at point 0
+	vector<Segment> diagonals;  // This will contain all the diagonals generated
+	for (vector<Point>::iterator it1 = polygon.begin(); it1 != polygon.end(); it1++) {
+		Point one = *it1;
+		vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
+		if (++it1 != polygon.end())
+			it1++;  // Skip a point
+		else
+			break;  // We are at the last point, all diagonals are made
+		for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
+		}
+		it1 = temp_it;  // Reset it11 to its begining position
+	}
 
-	 // Skip the next point
-
-	 // Go up to nth point.
-
-	 // Repeat this for all points. Building up a vector of segments
+	return diagonals;
 }
 
 std::vector<Segment> generateEdges(std::vector<Point> all_points)
@@ -90,4 +108,5 @@ std::vector<Segment> generateEdges(std::vector<Point> all_points)
 	// Creates the last segment (connects to starting point)
 	next = all_points[0];
 	generated_edges.push_back(Segment(current, next));
+	return generated_edges;
 }
