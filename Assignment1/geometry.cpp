@@ -95,18 +95,18 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
 
 std::vector<Segment> generateEdges(std::vector<Point> all_points)
 {
-	vector<Segment> generated_edges;
+	vector<Segment> polygon;
 	Point current = all_points[0];
 	Point next;
 	// Generates edges except for the last edge of the polygon
 	for (int count = 1; count < all_points.size(); count++)
 	{
 		next = all_points[count];
-		generated_edges.push_back(Segment(current, next));
+		polygon.push_back(Segment(current, next));
 		current = all_points[count];
 	}
 	// Creates the last segment (connects to starting point)
 	next = all_points[0];
-	generated_edges.push_back(Segment(current, next));
-	return generated_edges;
+	polygon.push_back(Segment(current, next));
+	return polygon;
 }
