@@ -48,11 +48,11 @@ public:
 		this->segment_length = 0;
 	}
 
-	Segment(Point a, Point b, double c)
+	Segment(Point a, Point b)
 	{
 		this->start = a;
 		this->end = b;
-		this->segment_length = c;
+		this->segment_length = getEuclideanDistance(a, b);
 	}
 };
 
