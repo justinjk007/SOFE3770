@@ -57,8 +57,11 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
      * Generate and return a list segments that represents all the
      * possible diagonals that can be generated from the given list of
      * points which make up the polygon. The points are expected to be
-     * sorted counterclockwise.
+     * sorted counterclockwise and more than 3 in size(No diagonals
+     * otherwise).
      */
+
+    vector<Segment> diagonals;
 
     // Start at point 0
 
@@ -67,4 +70,6 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
     // Go up to nth point.
 
     // Repeat this for all points. Building up a vector of segments
+
+    return diagonals;
 }
