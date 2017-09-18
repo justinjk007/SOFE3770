@@ -66,7 +66,7 @@ std::vector<Segment> generateEdges(std::vector<Point>);
 Segment findBiggestEdge(std::vector<Segment> all_edges);
 
 // Justin will implement these
-std::vector<Segment> generateDiagonals(std::vector<Points>);
+std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
 bool doIntersect(Segment, Segment);
 bool doIntersect(Segment, std::vector<Segment>);
