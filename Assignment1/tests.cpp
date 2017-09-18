@@ -43,5 +43,7 @@ TEST_CASE("Testing compareSegments()")
 	Segment begin(a1, a2, test_length_a);
 	Segment other(b1, b2, test_length_b);
 
-	REQUIRE(compareSegments(begin, other) == other);
+	Segment ans = compareSegments(begin, other);
+
+	REQUIRE(ans.getLength() == other.getLength());
 }
