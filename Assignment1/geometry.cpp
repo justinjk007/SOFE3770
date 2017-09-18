@@ -25,6 +25,17 @@ std::ostream& operator<<(std::ostream& os, const Point& point)
     return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const Segment& segment)
+{
+    /**
+     * Implements the output operator for the Segment class.
+     */
+    os << "(" << segment.start.x << ',' << segment.start.y << ")";
+    os << " ------ ";
+    os << "(" << segment.end.x << ',' << segment.end.y << ")" << endl;
+    return os;
+}
+
 Segment compareSegments(Segment a, Segment b)
 {
     if (a.getLength() >= b.getLength())
@@ -44,8 +55,7 @@ double Segment::getLength()
 Segment findBiggestEdge(std::vector<Segment> all_edges)
 {
     Segment current_biggest = all_edges[1];
-    for (auto& segment : all_edges)  // access vector by reference to avoid copying?
-    {
+    for (auto& segment : all_edges) {
         current_biggest = (compareSegments(current_biggest, segment));
     }
     return current_biggest;
@@ -61,8 +71,9 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
      * otherwise).
      */
 
-    vector<Segment> diagonals;
-
+    vector<Segment> diagonals;  // This will contain all the diagonals generated
+    for (auto& point : polygon) {
+    }
     // Start at point 0
 
     // Skip the next point

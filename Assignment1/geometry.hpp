@@ -9,53 +9,53 @@ using namespace std;
 class Point
 {
 public:
-	int x;
-	int y;
-	friend ostream& operator<<(ostream& os, const Point& point);  // Define os << operator for Point
-	Point()
-	{
-		/**
-		 * This is the default constructor
-		 */
-		this->x = 0;
-		this->y = 0;
-	}
-	Point(int x_cord, int y_cord)
-	{
-		/**
-		 * This constructor creates objects with the values passed in
-		 */
-		this->x = x_cord;
-		this->y = y_cord;
-	}
+    int x;
+    int y;
+    friend ostream& operator<<(ostream& os, const Point&);  // define os << operator for point
+    Point()
+    {
+        /**
+         * This is the default constructor
+         */
+        this->x = 0;
+        this->y = 0;
+    }
+    Point(int x_cord, int y_cord)
+    {
+        /**
+         * This constructor creates objects with the values passed in
+         */
+        this->x = x_cord;
+        this->y = y_cord;
+    }
 };
 
 // Make Line class here.
 class Segment
 {
-private:
-	double segment_length;
+   private:
+    double segment_length;
 
-public:
-	Point start;
-	Point end;
-	double getLength();  // Returns the length of the line
-	Segment()
-	{
-		Point default_set = { 0, 0 };
-		this->start = default_set;
-		this->end = default_set;
-		this->segment_length = 0;
-	}
+   public:
+    Point start;
+    Point end;
+    double getLength();                                       // Returns the length of the line
+    friend ostream& operator<<(ostream& os, const Segment&);  // define os << operator for Segment
+    Segment()
+    {
+        Point default_set    = {0, 0};
+        this->start          = default_set;
+        this->end            = default_set;
+        this->segment_length = 0;
+    }
 
-	Segment(Point a, Point b, double c)
-	{
-		this->start = a;
-		this->end = b;
-		this->segment_length = c;
-	}
+    Segment(Point a, Point b, double c)
+    {
+        this->start          = a;
+        this->end            = b;
+        this->segment_length = c;
+    }
 };
-
 
 // Add method declarations(prototypes) here.
 double getEuclideanDistance(Point, Point);
