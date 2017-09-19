@@ -9,7 +9,7 @@ using namespace std;
 
 class Point
 {
-public:
+   public:
     int x;
     int y;
     friend ostream& operator<<(ostream& os, const Point&);  // define os << operator for point
@@ -34,10 +34,10 @@ public:
 // Make Line class here.
 class Segment
 {
-private:
+   private:
     double length;
 
-public:
+   public:
     Point start;
     Point end;
     double getLength();                                       // Returns the length of the line
