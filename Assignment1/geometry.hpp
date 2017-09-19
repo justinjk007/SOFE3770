@@ -13,6 +13,7 @@ class Point
     int x;
     int y;
     friend ostream& operator<<(ostream& os, const Point&);  // define os << operator for point
+    friend bool operator==(const Point&,const Point&); // Defines == for Point
     Point()
     {
         /**
@@ -42,6 +43,7 @@ class Segment
     Point end;
     double getLength();                                       // Returns the length of the line
     friend ostream& operator<<(ostream& os, const Segment&);  // define os << operator for Segment
+    friend bool operator==(const Segment&, const Segment&); // Defines == for Segment
     Segment()
     {
         Point default_set = {0, 0};
@@ -60,17 +62,17 @@ class Segment
     }
 };
 
-// Add method declarations(prototypes) here.
-double getEuclideanDistance(Point, Point);
-
 // George will implement these
 Segment compareSegments(Segment a, Segment b);
 std::vector<Segment> generateEdges(std::vector<Point>);
 Segment findBiggestEdge(std::vector<Segment> all_edges);
 
 // Justin will implement these
+double getEuclideanDistance(Point, Point);
 std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
+bool onSegment(Point, Point, Point);
+int orientation(Point, Point, Point);
 bool doIntersect(Segment, Segment);
 bool doIntersect(Segment, std::vector<Segment>);
 
