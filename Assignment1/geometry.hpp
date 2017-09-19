@@ -13,6 +13,7 @@ public:
     int x;
     int y;
     friend ostream& operator<<(ostream& os, const Point&);  // define os << operator for point
+    friend bool operator==(const Point&,const Point&); // Defines == for Point
     Point()
     {
         /**
@@ -42,6 +43,7 @@ public:
     Point end;
     double getLength();                                       // Returns the length of the line
     friend ostream& operator<<(ostream& os, const Segment&);  // define os << operator for Segment
+    friend bool operator==(const Segment&, const Segment&); // Defines == for Segment
     Segment()
     {
         Point default_set = {0, 0};

@@ -35,6 +35,21 @@ std::ostream& operator<<(std::ostream& os, const Segment& segment)
     return os;
 }
 
+bool operator==(const Point& one, const Point& two)
+{
+    if (one.x == two.x && one.y == two.y) return true;
+    return false;
+}
+
+bool operator==(const Segment& one, const Segment& two)
+{
+    if (one.start == two.start && one.end == two.end)
+        return true;
+    else if (one.start == two.end && one.end == two.start)
+        return true;
+    return false;
+}
+
 Segment compareSegments(Segment a, Segment b)
 {
     /*
@@ -78,18 +93,34 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
      */
 
     vector<Segment> diagonals;  // This will contain all the diagonals generated
-    for (vector<Point>::iterator it1 = polygon.begin(); it1 != polygon.end(); it1++) {
-        Point point_one                 = *it1;
-        vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
-        if (++it1 != polygon.end())
-            it1++;  // Skip a point
-        else
-            break;  // We are at the last point, all diagonals are made
+
+    {
+        // Generate diagonals from the first point of the polygon
+        vector<Point>::iterator it1 = polygon.begin();
+        Point point_one             = *it1;
+	std::advance(it1,2);  // Skip a point
         for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
             Segment diagonal_line = {point_one, *it2};
             diagonals.push_back(diagonal_line);
         }
-        it1 = temp_it;  // Reset it11 to its begining position
+	diagonals.pop_back(); // Remove the last line it is an edge
+    }
+    {
+        // This is for rest of the points in the polygon
+    	vector<Point>::iterator it1 = polygon.begin();
+        for (it1 = ++it1; it1 != polygon.end(); it1++) {
+            Point point_one                 = *it1;
+            vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
+            if (++it1 != polygon.end())
+                it1++;  // Skip a point
+            else
+                break;  // We are at the last point, all diagonals are made
+            for (vector<Point>::iterator it2 = it1; it2 != polygon.end(); it2++) {
+                Segment diagonal_line = {point_one, *it2};
+                diagonals.push_back(diagonal_line);
+            }
+            it1 = temp_it;  // Reset it11 to its begining position
+        }
     }
 
     return diagonals;

@@ -46,12 +46,36 @@ TEST_CASE("Testing compareSegments()")
 
 TEST_CASE("Testing generateDiagonals()")
 {
-    std::vector<Point> input  = {{7, 4}, {29, 4}, {29, 26}, {7, 26}};  // Square
-    vector<Segment> diagonals = generateDiagonals(input);
+    std::vector<Point> square   = {{7, 4}, {29, 4}, {29, 26}, {7, 26}};
+    std::vector<Point> pentagon = {{7, 4}, {29, 4}, {29, 26}, {22, 30}, {7, 26}};
 
-    for (auto& diag : diagonals) {
-        // cout << diag;  // I will fix this later
-    }
+    vector<Segment> diagonals1 = generateDiagonals(pentagon);
+    vector<Segment> answer1   = {{
+                                   {7, 4}, {29, 26},
+                               },
+                               {
+                                   {7, 4}, {22, 30},
+                               },
+                               {
+                                   {29, 4}, {22, 30},
+                               },
+                               {
+                                   {29, 4}, {7, 26},
+                               },
+                               {
+				   {29, 26}, {7, 26}
+			       }};
+
+    vector<Segment> diagonals2 = generateDiagonals(square);
+    vector<Segment> answer2   = {{
+                                   {7, 4}, {29, 26},
+                               },
+                               {
+				   {29, 4}, {7, 26}
+			       }};
+
+    REQUIRE(diagonals1 == answer1);
+    REQUIRE(diagonals2 == answer2);
 }
 
 TEST_CASE("Integration test")
