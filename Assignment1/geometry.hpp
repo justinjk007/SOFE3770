@@ -62,15 +62,13 @@ public:
     }
 };
 
-// Add method declarations(prototypes) here.
-double getEuclideanDistance(Point, Point);
-
 // George will implement these
 Segment compareSegments(Segment a, Segment b);
 std::vector<Segment> generateEdges(std::vector<Point>);
 Segment findBiggestEdge(std::vector<Segment> all_edges);
 
 // Justin will implement these
+double getEuclideanDistance(Point, Point);
 std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
 bool onSegment(Point, Point, Point);
