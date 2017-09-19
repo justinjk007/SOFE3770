@@ -95,6 +95,20 @@ TEST_CASE("Checking intersection methods")
     REQUIRE(doIntersect(dummy, diagonals) == false);
 }
 
+TEST_CASE("Testing to see of the point is inside or outside the polygon")
+{
+    Point test2(10, 7);
+    Point test1(0, 0);
+    vector<Point> pentagon = {{7, 4}, {29, 4}, {29, 26}, {22, 30}, {7, 26}};
+    vector<Point> square   = {{7, 4}, {29, 4}, {29, 26}, {7, 26}};
+
+    bool ans1 = pointIsOutside(test2, square);
+    bool ans2 = pointIsOutside(test1, pentagon);
+
+    REQUIRE(ans2 == true);
+    REQUIRE(ans1 == false);
+}
+
 TEST_CASE("Integration test")  // TODO
 {
     /**

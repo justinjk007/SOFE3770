@@ -174,8 +174,8 @@ bool pointIsOutside(Point P, std::vector<Point> polygon)
     }
 
     // 0 if even (out), and 1 if  odd (in)
-    if ((cn & 1) == 0) return false;
-    return true;
+    if ((cn & 1) == 0) return true;
+    return false;
 }
 
 bool onSegment(Point p, Point q, Point r)
