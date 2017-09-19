@@ -205,7 +205,12 @@ bool doIntersect(Segment segment, std::vector<Segment> checkable)
      * Check if the given segment intersects with any of the given lines
      */
     for (auto& checking : checkable) {
-        if (doIntersect(checking, segment)) return true;
+        if (checking.start == segment.start || checking.end == segment.end ||
+            checking.start == segment.end || checking.end == segment.start) {
+            return false;  // Special case where the intersection is happening at the end/start
+        } else if (doIntersect(checking, segment)) {
+            return true;
+        }
     }
     return false;  // No intersections
 }

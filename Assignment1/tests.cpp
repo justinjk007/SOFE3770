@@ -82,7 +82,7 @@ TEST_CASE("Checking intersection methods")
 
     Segment dummy ={{0,5},{0,10}};
 
-    REQUIRE(doIntersect(edges.front(), diagonals) == true); // TODO: This is supposed to be false
+    REQUIRE(doIntersect(edges.front(), diagonals) == false);
     REQUIRE(doIntersect(dummy, diagonals) == false);
 }
 
