@@ -50,35 +50,43 @@ TEST_CASE("Testing generateDiagonals()")
     std::vector<Point> pentagon = {{7, 4}, {29, 4}, {29, 26}, {22, 30}, {7, 26}};
 
     vector<Segment> diagonals1 = generateDiagonals(pentagon);
-    vector<Segment> answer1   = {{
-                                   {7, 4}, {29, 26},
-                               },
+    vector<Segment> answer1    = {{
+	    {7, 4}, {29, 26},
+	},
                                {
                                    {7, 4}, {22, 30},
                                },
-                               {
+				  {
                                    {29, 4}, {22, 30},
                                },
                                {
                                    {29, 4}, {7, 26},
                                },
-                               {
-				   {29, 26}, {7, 26}
-			       }};
+                               {{29, 26}, {7, 26}}};
 
     vector<Segment> diagonals2 = generateDiagonals(square);
-    vector<Segment> answer2   = {{
-                                   {7, 4}, {29, 26},
-                               },
-                               {
-				   {29, 4}, {7, 26}
-			       }};
+    vector<Segment> answer2    = {{
+	    {7, 4}, {29, 26},
+	},
+                               {{29, 4}, {7, 26}}};
 
     REQUIRE(diagonals1 == answer1);
     REQUIRE(diagonals2 == answer2);
 }
 
-TEST_CASE("Integration test")
+TEST_CASE("Checking intersection methods")
+{
+    vector<Point> pentagon    = {{7, 4}, {29, 4}, {29, 26}, {22, 30}, {7, 26}};
+    vector<Segment> edges     = generateEdges(pentagon);
+    vector<Segment> diagonals = generateDiagonals(pentagon);
+
+    Segment dummy ={{0,5},{0,10}};
+
+    REQUIRE(doIntersect(edges.front(), diagonals) == true); // TODO: This is supposed to be false
+    REQUIRE(doIntersect(dummy, diagonals) == false);
+}
+
+TEST_CASE("Integration test") // TODO
 {
     /**
      * As per the assignment document

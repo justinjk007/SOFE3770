@@ -73,6 +73,8 @@ Segment findBiggestEdge(std::vector<Segment> all_edges);
 // Justin will implement these
 std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
+bool onSegment(Point, Point, Point);
+int orientation(Point, Point, Point);
 bool doIntersect(Segment, Segment);
 bool doIntersect(Segment, std::vector<Segment>);
 
