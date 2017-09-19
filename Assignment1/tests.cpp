@@ -50,22 +50,10 @@ TEST_CASE("Testing generateDiagonals()")
     std::vector<Point> pentagon = {{7, 4}, {29, 4}, {29, 26}, {22, 30}, {7, 26}};
 
     vector<Segment> diagonals1 = generateDiagonals(pentagon);
-    vector<Segment> answer1    = {{
-                                   {7, 4},
-                                   {29, 26},
-                               },
-                               {
-                                   {7, 4},
-                                   {22, 30},
-                               },
-                               {
-                                   {29, 4},
-                                   {22, 30},
-                               },
-                               {
-                                   {29, 4},
-                                   {7, 26},
-                               },
+    vector<Segment> answer1    = {{{7, 4}, {29, 26}},
+				  {{7, 4}, {22, 30}},
+				  {{29, 4}, {22, 30}},
+				  {{29, 4}, {7, 26}},
                                {{29, 26}, {7, 26}}};
 
     vector<Segment> diagonals2 = generateDiagonals(square);
@@ -87,8 +75,8 @@ TEST_CASE("Checking intersection methods")
     Segment single2 = {{-3, -2}, {1, -2}};
 
     REQUIRE(doIntersect(single1, single2) == true);
-    REQUIRE(doIntersect(edges.front(), diagonals) == false);
-    REQUIRE(doIntersect(dummy, diagonals) == false);
+    REQUIRE(doIntersect(edges.front(), diagonals,pentagon) == false);
+    REQUIRE(doIntersect(dummy, diagonals,pentagon) == false);
 }
 
 TEST_CASE("Testing generateEdges()")

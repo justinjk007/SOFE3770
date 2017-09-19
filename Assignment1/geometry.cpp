@@ -69,6 +69,19 @@ double Segment::getLength()
     return this->length;
 }
 
+Point Segment::getMidpoint()
+{
+    /**
+     * Returns the midpoint of this segment
+     */
+    int mx, my;
+    mx = (int)(double)(this->start.x + this->end.x) / 2;  // Calculate the mid-point of the line
+    my = (int)(double)(this->start.y + this->end.y) / 2;
+
+    Point point(mx, my);
+    return point;
+}
+
 Segment findBiggestEdge(std::vector<Segment> all_edges)
 {
     /**
@@ -162,11 +175,10 @@ bool pointIsOutside(Point P, std::vector<Point> polygon)
      */
     int cn = 0;  // the  crossing number counter
 
-    // loop through all edges of the polygon
-    for (auto V = polygon.begin(); V < polygon.end() - 1; ++V) {  // edge from V[i]  to V[i+1]
-        if (((V[0].y <= P.y) && (V[1].y > P.y))                   // an upward cross0ng
-            || ((V[0].y > P.y) && (V[1].y <= P.y))) {             // a downward cross0ng
-            // compute  the actual edge-ray 0ntersect x-coord0nate
+    for (auto V = polygon.begin(); V < polygon.end() - 1; ++V) {
+        if (((V[0].y <= P.y) && (V[1].y > P.y))        // an upward cross0ng
+            || ((V[0].y > P.y) && (V[1].y <= P.y))) {  // a downward cross0ng
+            // compute  the actual edge-ray intersect x-coordinate
             float vt = (float)(P.y - V[0].y) / (V[1].y - V[0].y);
             if (P.x < V[0].x + vt * (V[1].x - V[0].x))  // P.x < 0ntersect
                 ++cn;                                   // a valid crossing of y=P.y right of P.x
@@ -234,18 +246,33 @@ bool doIntersect(Segment a, Segment b)
     return false;  // Doesn't fall in any of the above cases
 }
 
-bool doIntersect(Segment segment, std::vector<Segment> checkable)
+bool doIntersect(Segment segment, std::vector<Segment> checkable, std::vector<Point> polygon)
 {
     /**
      * Check if the given segment intersects with any of the given lines
      */
     for (auto& checking : checkable) {
-        if (checking.start == segment.start || checking.end == segment.end ||
-            checking.start == segment.end || checking.end == segment.start) {
+        if (pointIsOutside(checking.getMidpoint(), polygon))
+            return true;
+        else if (checking.start == segment.start || checking.end == segment.end ||
+                 checking.start == segment.end || checking.end == segment.start) {
             return false;  // Special case where the intersection is happening at the end/start
         } else if (doIntersect(checking, segment)) {
             return true;
         }
     }
     return false;  // No intersections
+}
+
+Segment getBiggestSegmentPossible(std::vector<Point> polygon)
+{
+    /**
+     * This method integrates all other method to find the biggest
+     * line that can draw along a polygon.
+     */
+    Segment biggest_line;
+    size_t num = polygon.size(); // Get the vectors size
+
+
+    return biggest_line;
 }
