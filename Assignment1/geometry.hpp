@@ -73,6 +73,8 @@ std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
 bool onSegment(Point, Point, Point);
 int orientation(Point, Point, Point);
+int isLeft(Point, Point, Point);
+bool pointIsOutside(Point, std::vector<Point>);
 bool doIntersect(Segment, Segment);
 bool doIntersect(Segment, std::vector<Segment>);
 

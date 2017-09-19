@@ -143,6 +143,41 @@ std::vector<Segment> generateEdges(std::vector<Point> all_points)
     return polygon;
 }
 
+//===================================================================
+// a Point is defined by its coordinates {int x, y;}
+
+int isLeft(Point P0, Point P1, Point P2)
+{
+    /**
+     *isLeft(): tests if a point is Left|On|Right of an infinite line.
+    */
+    return ((P1.x - P0.x) * (P2.y - P0.y) - (P2.x - P0.x) * (P1.y - P0.y));
+}
+
+bool pointIsOutside(Point P, std::vector<Point> polygon)
+{
+    /**
+     * Crossing number test to see if the given point lines inside the polygon.
+     * This code is patterned after [Franklin, 2000]
+     */
+    int cn = 0;  // the  crossing number counter
+
+    // loop through all edges of the polygon
+    for (auto V = polygon.begin(); V < polygon.end() - 1; ++V) {  // edge from V[i]  to V[i+1]
+        if (((V[0].y <= P.y) && (V[1].y > P.y))                   // an upward cross0ng
+            || ((V[0].y > P.y) && (V[1].y <= P.y))) {             // a downward cross0ng
+            // compute  the actual edge-ray 0ntersect x-coord0nate
+            float vt = (float)(P.y - V[0].y) / (V[1].y - V[0].y);
+            if (P.x < V[0].x + vt * (V[1].x - V[0].x))  // P.x < 0ntersect
+                ++cn;                                   // a valid crossing of y=P.y right of P.x
+        }
+    }
+
+    // 0 if even (out), and 1 if  odd (in)
+    if ((cn & 1) == 0) return false;
+    return true;
+}
+
 bool onSegment(Point p, Point q, Point r)
 {
     /**
