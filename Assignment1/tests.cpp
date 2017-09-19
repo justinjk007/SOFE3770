@@ -82,6 +82,10 @@ TEST_CASE("Checking intersection methods")
 
     Segment dummy ={{0,5},{0,10}};
 
+    Segment single1 = {{-1,-2},{3,2}};
+    Segment single2 = {{-3,-2},{1,-2}};
+
+    REQUIRE(doIntersect(single1,single2) == true);
     REQUIRE(doIntersect(edges.front(), diagonals) == false);
     REQUIRE(doIntersect(dummy, diagonals) == false);
 }
