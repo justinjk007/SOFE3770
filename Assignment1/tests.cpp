@@ -69,11 +69,7 @@ TEST_CASE("Testing generateDiagonals()")
                                {{29, 26}, {7, 26}}};
 
     vector<Segment> diagonals2 = generateDiagonals(square);
-    vector<Segment> answer2    = {{
-                                   {7, 4},
-                                   {29, 26},
-                               },
-                               {{29, 4}, {7, 26}}};
+    vector<Segment> answer2    = {{{7, 4}, {29, 26}}, {{29, 4}, {7, 26}}};
 
     REQUIRE(diagonals1 == answer1);
     REQUIRE(diagonals2 == answer2);
@@ -93,6 +89,17 @@ TEST_CASE("Checking intersection methods")
     REQUIRE(doIntersect(single1, single2) == true);
     REQUIRE(doIntersect(edges.front(), diagonals) == false);
     REQUIRE(doIntersect(dummy, diagonals) == false);
+}
+
+TEST_CASE("Testing generateEdges()")
+{
+    std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}};
+    vector<Segment> testing   = generateEdges(input1);
+    vector<Segment> answer    = {{{0, 20}, {40, 0}},   {{40, 0}, {40, 20}},  {{40, 20}, {70, 50}},
+                              {{70, 50}, {50, 70}}, {{50, 70}, {30, 50}}, {{30, 50}, {0, 50}},
+                              {{0, 50}, {0, 20}}};
+
+    REQUIRE(testing == answer);
 }
 
 TEST_CASE("Integration test")  // TODO

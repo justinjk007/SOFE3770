@@ -150,7 +150,7 @@ int isLeft(Point P0, Point P1, Point P2)
 {
     /**
      *isLeft(): tests if a point is Left|On|Right of an infinite line.
-    */
+     */
     return ((P1.x - P0.x) * (P2.y - P0.y) - (P2.x - P0.x) * (P1.y - P0.y));
 }
 
