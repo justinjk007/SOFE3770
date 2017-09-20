@@ -41,7 +41,7 @@ class Segment
    public:
     Point start;
     Point end;
-    double getLength();                                       // Returns the length of the line
+    double getLength();  // Returns the length of the line
     Point getMidpoint();
     friend ostream& operator<<(ostream& os, const Segment&);  // define os << operator for Segment
     friend bool operator==(const Segment&, const Segment&);   // Defines == for Segment
@@ -64,12 +64,13 @@ class Segment
 };
 
 // George will implement these
-Segment compareSegments(Segment a, Segment b);
+Segment compareSegments(Segment, Segment);
 std::vector<Segment> generateEdges(std::vector<Point>);
-Segment findBiggestEdge(std::vector<Segment> all_edges);
+Segment findBiggestEdge(std::vector<Segment>);
 
 // Justin will implement these
 double getEuclideanDistance(Point, Point);
+bool compareSeg(Segment, Segment);
 std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
 bool onSegment(Point, Point, Point);
@@ -78,6 +79,6 @@ int isLeft(Point, Point, Point);
 bool pointIsOutside(Point, std::vector<Point>);
 bool doIntersect(Segment, Segment);
 bool doIntersect(Segment, std::vector<Segment>, std::vector<Point>);
-Segment getBiggestSegmentPossible(std::vector<Point>); // Everything integrated
+Segment getBiggestSegmentPossible(std::vector<Point>);  // Everything integrated
 
 #endif /* GEOMETRY_HPP */

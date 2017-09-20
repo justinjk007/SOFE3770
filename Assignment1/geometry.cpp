@@ -61,6 +61,14 @@ Segment compareSegments(Segment a, Segment b)
         return b;
 }
 
+bool compareSeg(Segment a, Segment b)
+{
+    /**
+     * This was written for vector::sort
+     */
+    return (a.getLength() < b.getLength());
+}
+
 double Segment::getLength()
 {
     /**
@@ -264,15 +272,36 @@ bool doIntersect(Segment segment, std::vector<Segment> checkable, std::vector<Po
     return false;  // No intersections
 }
 
-Segment getBiggestSegmentPossible(std::vector<Point> polygon)
+Segment getBiggestSegmentPossible(std::vector<Point> points)
 {
     /**
      * This method integrates all other method to find the biggest
      * line that can draw along a polygon.
      */
     Segment biggest_line;
-    size_t num = polygon.size(); // Get the vectors size
+    size_t num              = points.size();  // Get the vectors size
+    vector<Segment> polygon = generateEdges(points);
+    biggest_line            = findBiggestEdge(polygon);
 
+    if (num <= 2) {
+        cout << "\nINVALID POLYGON\n";
+        exit(1);
+    }
+    if (num == 3) {
+        return biggest_line;
+    }
 
+    vector<Segment> diagonals = generateDiagonals(points);
+    std::sort(diagonals.begin(), diagonals.end(), compareSeg);
+
+    while (diagonals.size() <= 1) {
+        Segment current = diagonals.back();
+	diagonals.pop_back();
+	if (!doIntersect(current, polygon, points)) {
+	    if (current.getLength() > biggest_line.getLength()) return current;
+	} else {
+	    continue;
+	}
+    }
     return biggest_line;
 }

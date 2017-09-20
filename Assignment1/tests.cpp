@@ -113,4 +113,8 @@ TEST_CASE("Integration test")  // TODO
      */
     std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}};
     std::vector<Point> input2 = {{0, 2017}, {-2017, -2017}, {2017, 0}};
+
+    Segment answer1 = getBiggestSegmentPossible(input1);
+
+    REQUIRE(answer1.getLength() == 76.157731059);
 }
