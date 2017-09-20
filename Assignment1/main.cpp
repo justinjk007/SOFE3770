@@ -15,13 +15,6 @@ int main()
     vector<int> y_Points;
     vector<Point> given_points;
 
-    /*
-    Point a;
-    cout << "The co-ordinates of a are " << a.x << " & " << a.y << "\n";
-    cout << "Why are they both 0 GEORGE ?\n";
-    // See here: http://sandbox.mc.edu/~bennet/cs220/codeex/cl0_cc.html
-    */
-
     cout << "Please enter the number of Vertices (3 < _ < 200): ";
     cin >> polygon_Vertices;
     // Error checking for incorrect input
@@ -57,13 +50,13 @@ int main()
     // Identify largest segment in polygon
     Segment result = getBiggestSegmentPossible(given_points);
 
+    auto finish                      = chrono::high_resolution_clock::now();  // Stop clock
+    chrono::duration<double> elapsed = finish - start;                        // Mesure time elapsed
+
     //	Output length and start/end points of largest segment
     cout << "Longest segment found: \n";
     cout << "Length: " << result.getLength() << "\n";
     cout << "Points: " << result.start << " -      " << result.end;
-
-    auto finish                      = chrono::high_resolution_clock::now();  // Stop clock
-    chrono::duration<double> elapsed = finish - start;                        // Mesure time elapsed
     cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
 
     // keeps window open
