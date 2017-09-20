@@ -1,4 +1,5 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+#include <chrono>
 #include <iostream>
 #include "catch.hpp"
 #include "geometry.hpp"
@@ -114,15 +115,32 @@ TEST_CASE("Integration test")  // TODO change pow to **
     std::vector<Point> input3 = {{3, 0}, {3, 3}, {8, 5}, {2, 6}, {1, 4}};  // 5
     // (2.00,6.00), (1.00,4.00), (3.00,0.00), (3.00,3.00), (8.00,5.00)
 
-    std::vector<Point> input4 = {{0, 2017}, {-2017, -2017}, {2017, 0}};  // 9
-    std::vector<Point> input5 = {{0, 2017}, {-2017, -2017}, {2017, 0}};  // 13
+    std::vector<Point> input4 = {{4, 8}, {2, 6}, {1, 4}, {1, 2}, {2, 0},
+                                 {4, 1}, {5, 0}, {7, 4}, {7, 6}};
+    // 4.00,8.00), (2.00,6.00), (1.00,4.00), (1.00,2.00), (2.00,0.00),
+    // (4.00,1.00), (5.00,0.00), (7.00,4.00), (7.00,6.00)
 
-    Segment answer1 = getBiggestSegmentPossible(input1);
-    Segment answer2 = getBiggestSegmentPossible(input2);
-    Segment answer3 = getBiggestSegmentPossible(input3);
-    Segment ans3    = {{8, 5}, {1, 4}};
+    std::vector<Point> input5 = {{6, 5}, {4, 5}, {2, 5}, {1, 4}, {1, 3}, {1, 1}, {2, 0},
+                                 {3, 0}, {5, 0}, {7, 0}, {9, 2}, {6, 3}, {8, 5}};  // 13
+
+    Segment answer1                  = getBiggestSegmentPossible(input1);
+    Segment answer2                  = getBiggestSegmentPossible(input2);
+    Segment answer3                  = getBiggestSegmentPossible(input3);
+    Segment answer4                  = getBiggestSegmentPossible(input4);
+
+    auto start                       = chrono::high_resolution_clock::now();  // Start clock
+    Segment answer5                  = getBiggestSegmentPossible(input5);
+    auto finish                      = chrono::high_resolution_clock::now();  // Stop clock
+    chrono::duration<double> elapsed = finish - start;                        // Mesure time elapsed
+    cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
+
+    Segment ans3 = {{8, 5}, {1, 4}};
+    Segment ans4 = {{2, 0}, {4, 8}};
+    Segment ans5 = {{1, 4}, {9, 2}};
 
     REQUIRE(answer1.getLength() == Approx(76.157731059));
     REQUIRE(answer2.getLength() == Approx(4510.149110617));
     REQUIRE(answer3.getLength() == Approx(ans3.getLength()));
+    REQUIRE(answer4.getLength() == Approx(ans4.getLength()));
+    REQUIRE(answer5.getLength() == Approx(ans5.getLength()));
 }
