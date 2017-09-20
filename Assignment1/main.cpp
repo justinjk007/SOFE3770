@@ -9,12 +9,11 @@ using namespace std;
 
 int main()
 {
-    auto start = chrono::high_resolution_clock::now();  // Start clock
-
     // Declaring and Initializng variables
     int polygon_Vertices;
     vector<int> x_Points;
     vector<int> y_Points;
+    vector<Point> given_points;
 
     /*
     Point a;
@@ -31,15 +30,9 @@ int main()
         cin >> polygon_Vertices;
     }
 
-    /*for (int xTemp, yTemp; cin >> xTemp >> yTemp;)
-    {
-                    xPoints.push_back(xTemp);
-                    yPoints.push_back(yTemp);
-    }*/
-
-    cout << "Enter the vertices co-ordinates starting with x then y for each pair in a "
-            "counter-clockwise order.";
-    cout << "Please enter integers equal to or less than 10^6.";
+    cout << "Enter the vertices co-ordinates starting with x then y ";
+    cout << "for each pair in a counter-clockwise order. \n";
+    cout << "Please enter integer pairs equal to or less than 10^6 separated by a space. \n";
     for (int count = 0; count < polygon_Vertices; count++) {
         int x_Temp;
         cin >> x_Temp;
@@ -55,13 +48,19 @@ int main()
             cout << "Error";
             cin >> y_Temp;
         }
+        // Populates vector with point objects using user defined x and y coordinates
+        given_points.push_back(Point(x_Points[count], y_Points[count]));
     }
 
-    // Compare all sides of the polygon and determine largest of the sides
+    auto start = chrono::high_resolution_clock::now();  // Start clock
 
-    // Compare each line segment withing the polygon skipping the first and last comparison (already
-    // compared as sides)
-    // additionally, if a segment is larger than the current largest segment check for intersection.
+    // Identify largest segment in polygon
+    Segment result = getBiggestSegmentPossible(given_points);
+
+    //	Output length and start/end points of largest segment
+    cout << "Longest segment found: \n";
+    cout << "Length: " << result.getLength() << "\n";
+    cout << "Points: " << result.start << " -      " << result.end;
 
     auto finish                      = chrono::high_resolution_clock::now();  // Stop clock
     chrono::duration<double> elapsed = finish - start;                        // Mesure time elapsed
