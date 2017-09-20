@@ -260,7 +260,7 @@ bool isGoodDiagonal(Segment segment, std::vector<Segment> checkable, std::vector
      * Check if the given segment intersects with any of the given lines
      */
     for (auto& checking : checkable) {
-	if (pointIsOutside(checking.getMidpoint(), polygon))
+	if (pointIsOutside(segment.getMidpoint(), polygon))
 	    return true;
 	else if (checking.start == segment.start || checking.end == segment.end ||
 		 checking.start == segment.end || checking.end == segment.start)
