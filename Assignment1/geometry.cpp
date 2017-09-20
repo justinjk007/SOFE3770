@@ -294,7 +294,7 @@ Segment getBiggestSegmentPossible(std::vector<Point> points)
     vector<Segment> diagonals = generateDiagonals(points);
     std::sort(diagonals.begin(), diagonals.end(), compareSeg);
 
-    while (diagonals.size() <= 1) {
+    while (diagonals.size() >= 1) {
         Segment current = diagonals.back();
 	diagonals.pop_back();
 	if (!doIntersect(current, polygon, points)) {
