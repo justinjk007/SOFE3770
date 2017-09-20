@@ -254,20 +254,21 @@ bool doIntersect(Segment a, Segment b)
     return false;  // Doesn't fall in any of the above cases
 }
 
-bool doIntersect(Segment segment, std::vector<Segment> checkable, std::vector<Point> polygon)
+bool isGoodDiagonal(Segment segment, std::vector<Segment> checkable, std::vector<Point> polygon)
 {
     /**
      * Check if the given segment intersects with any of the given lines
      */
     for (auto& checking : checkable) {
-        if (pointIsOutside(checking.getMidpoint(), polygon))
-            return true;
-        else if (checking.start == segment.start || checking.end == segment.end ||
-                 checking.start == segment.end || checking.end == segment.start) {
-            return false;  // Special case where the intersection is happening at the end/start
-        } else if (doIntersect(checking, segment)) {
-            return true;
-        }
+	if (pointIsOutside(checking.getMidpoint(), polygon))
+	    return true;
+	else if (checking.start == segment.start || checking.end == segment.end ||
+		 checking.start == segment.end || checking.end == segment.start)
+	    return false;  // Special case where the intersection is happening at the end/start
+	else if (doIntersect(checking, segment))
+	    return true;
+	else
+	    return false;  // No intersections
     }
     return false;  // No intersections
 }
@@ -294,10 +295,10 @@ Segment getBiggestSegmentPossible(std::vector<Point> points)
     vector<Segment> diagonals = generateDiagonals(points);
     std::sort(diagonals.begin(), diagonals.end(), compareSeg);
 
-    while (diagonals.size() >= 1) {
-        Segment current = diagonals.back();
+    while (diagonals.size() > 0) {
+	Segment current = diagonals.back();
 	diagonals.pop_back();
-	if (!doIntersect(current, polygon, points)) {
+	if (!isGoodDiagonal(current, polygon, points)) {
 	    if (current.getLength() > biggest_line.getLength()) return current;
 	} else {
 	    continue;

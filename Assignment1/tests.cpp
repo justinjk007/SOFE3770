@@ -75,8 +75,8 @@ TEST_CASE("Checking intersection methods")
     Segment single2 = {{-3, -2}, {1, -2}};
 
     REQUIRE(doIntersect(single1, single2) == true);
-    REQUIRE(doIntersect(edges.front(), diagonals,pentagon) == false);
-    REQUIRE(doIntersect(dummy, diagonals,pentagon) == false);
+    REQUIRE(isGoodDiagonal(edges.front(), diagonals,pentagon) == false);
+    REQUIRE(isGoodDiagonal(dummy, diagonals,pentagon) == false);
 }
 
 TEST_CASE("Testing generateEdges()")
@@ -104,19 +104,24 @@ TEST_CASE("Testing to see of the point is inside or outside the polygon")
     REQUIRE(ans1 == false);
 }
 
-TEST_CASE("Integration test")  // TODO
+TEST_CASE("Integration test")  // TODO change pow to **
 {
-    /**
-     * As per the assignment document
-     * Answer1 should be 76.157731059
-     * Answer2 should be 4510.149110617
-     */
-    std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}};
-    std::vector<Point> input2 = {{0, 2017}, {-2017, -2017}, {2017, 0}};
+    std::vector<Point> input1 = {{0, 20}, {40, 0}, {40, 20}, {70, 50}, {50, 70}, {30, 50}, {0, 50}}; // 7
+    std::vector<Point> input2 = {{0, 2017}, {-2017, -2017}, {2017, 0}}; // 3
+
+    // https://www.mathsisfun.com/geometry/polygons-interactive.html
+    std::vector<Point> input3 = {{3, 0}, {3, 3}, {8, 5}, {2, 6}, {1, 4}};  // 5
+    // (2.00,6.00), (1.00,4.00), (3.00,0.00), (3.00,3.00), (8.00,5.00)
+
+    std::vector<Point> input4 = {{0, 2017}, {-2017, -2017}, {2017, 0}}; // 9
+    std::vector<Point> input5 = {{0, 2017}, {-2017, -2017}, {2017, 0}}; // 13
 
     Segment answer1 = getBiggestSegmentPossible(input1);
     Segment answer2 = getBiggestSegmentPossible(input2);
+    Segment answer3 = getBiggestSegmentPossible(input3);
+    Segment ans3 = {{8, 5}, {1, 4}};
 
-    REQUIRE(answer2.getLength() == Approx(4510.149110617));
     REQUIRE(answer1.getLength() == Approx(76.157731059));
+    REQUIRE(answer2.getLength() == Approx(4510.149110617));
+    REQUIRE(answer3.getLength() == Approx(ans3.getLength()));
 }

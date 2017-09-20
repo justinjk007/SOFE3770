@@ -78,7 +78,7 @@ int orientation(Point, Point, Point);
 int isLeft(Point, Point, Point);
 bool pointIsOutside(Point, std::vector<Point>);
 bool doIntersect(Segment, Segment);
-bool doIntersect(Segment, std::vector<Segment>, std::vector<Point>);
+bool isGoodDiagonal(Segment, std::vector<Segment>, std::vector<Point>);
 Segment getBiggestSegmentPossible(std::vector<Point>);  // Everything integrated
 
 #endif /* GEOMETRY_HPP */
