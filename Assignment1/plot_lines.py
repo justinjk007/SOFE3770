@@ -1,4 +1,5 @@
 import csv
+import sys
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
@@ -6,7 +7,11 @@ ax = fig.add_subplot(111)
 
 def parse(file_name):
     "Parses the data sets from the csv file we are given to work with"
-    file = open(file_name)
+    try:
+        file = open(file_name)
+    except IOError:
+        print "Failed to open the data file"
+        sys.exit()
     rawFile = csv.reader(file)    # Reading the csv file into a raw form
     rawData = list(rawFile)       # Converting the raw data into list from.
     file.close()
