@@ -59,9 +59,9 @@ int main()
     cout << "Points: " << result.start << " -      " << result.end;
     cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
 
-    // keeps window open
-    int dummy;
-    cin >> dummy;
+    vector<Segment> edges = generateEdges(given_points);
+    writeToFile(edges, result);
+    draw();
 
     return 0;
 }
