@@ -600,10 +600,10 @@ TEST_CASE("Integration test")  // TODO change pow to **
     Segment answer4 = getBiggestSegmentPossible(input4);
     Segment answer5 = getBiggestSegmentPossible(input5);
     Segment answer6 = getBiggestSegmentPossible(input6);
-    Segment answer7 = getBiggestSegmentPossible(input7);
+    Segment answer8 = getBiggestSegmentPossible(input8);
 
     auto start                       = chrono::high_resolution_clock::now();  // Start clock
-    Segment answer8 = getBiggestSegmentPossible(input8);
+    Segment answer7 = getBiggestSegmentPossible(input7);
     auto finish                      = chrono::high_resolution_clock::now();  // Stop clock
     chrono::duration<double> elapsed = finish - start;                        // Mesure time elapsed
     cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
@@ -612,8 +612,8 @@ TEST_CASE("Integration test")  // TODO change pow to **
     Segment ans4 = {{2, 0}, {4, 8}};
     Segment ans5 = {{1, 4}, {9, 2}};
 
-    vector<Segment> edges8 = generateEdges(input8);
-    writeToFile(edges8, answer8);
+    vector<Segment> edges = generateEdges(input7);
+    writeToFile(edges, answer7);
     draw();
 
     REQUIRE(answer1.getLength() == Approx(76.157731059));
