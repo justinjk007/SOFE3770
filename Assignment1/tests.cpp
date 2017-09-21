@@ -123,10 +123,10 @@ TEST_CASE("Integration test")  // TODO change pow to **
     std::vector<Point> input5 = {{6, 5}, {4, 5}, {2, 5}, {1, 4}, {1, 3}, {1, 1}, {2, 0},
                                  {3, 0}, {5, 0}, {7, 0}, {9, 2}, {6, 3}, {8, 5}};  // 13
 
-    Segment answer1                  = getBiggestSegmentPossible(input1);
-    Segment answer2                  = getBiggestSegmentPossible(input2);
-    Segment answer3                  = getBiggestSegmentPossible(input3);
-    Segment answer4                  = getBiggestSegmentPossible(input4);
+    Segment answer1 = getBiggestSegmentPossible(input1);
+    Segment answer2 = getBiggestSegmentPossible(input2);
+    Segment answer3 = getBiggestSegmentPossible(input3);
+    Segment answer4 = getBiggestSegmentPossible(input4);
 
     auto start                       = chrono::high_resolution_clock::now();  // Start clock
     Segment answer5                  = getBiggestSegmentPossible(input5);
@@ -137,6 +137,10 @@ TEST_CASE("Integration test")  // TODO change pow to **
     Segment ans3 = {{8, 5}, {1, 4}};
     Segment ans4 = {{2, 0}, {4, 8}};
     Segment ans5 = {{1, 4}, {9, 2}};
+
+    vector<Segment> edges5 = generateEdges(input5);
+    writeToFile(edges5, answer5);
+    draw();
 
     REQUIRE(answer1.getLength() == Approx(76.157731059));
     REQUIRE(answer2.getLength() == Approx(4510.149110617));

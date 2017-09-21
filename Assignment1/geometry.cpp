@@ -1,5 +1,7 @@
 #include "geometry.hpp"
 #include <algorithm>
+#include <fstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -305,4 +307,36 @@ Segment getBiggestSegmentPossible(std::vector<Point> points)
         }
     }
     return biggest_line;
+}
+
+void writeToFile(std::vector<Segment> polygon, Segment diagonal)
+{
+    /**
+     * Write the lines list to file in raw, meaning the coordinates of
+     * points of each line in the list.
+     */
+    ofstream myfile;
+    string file_name = "rawData.csv";
+    myfile.open(file_name);
+    myfile << "x,y\n";
+    // Write Diagonal
+    myfile << diagonal.start.x << "," << diagonal.start.y << "\n";
+    myfile << diagonal.end.x << "," << diagonal.end.y << "\n";
+
+    // Write edges of the polygon
+    vector<Segment>::iterator it = polygon.begin();
+    while (it != polygon.end()) {
+        myfile << it->start.x << "," << it->start.y << "\n";
+        myfile << it->end.x << "," << it->end.y << "\n";
+        ++it;
+    }
+    myfile.close();
+}
+
+void draw(){
+    /**
+     * Draw the polygon and the diagonal using mat plot lib and hacked up code ran using system()
+     */
+    cout << "\nDrawing ploygon in matplotlib\n";
+    system("python plot_lines.py");
 }

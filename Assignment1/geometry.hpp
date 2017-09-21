@@ -80,5 +80,7 @@ bool pointIsOutside(Point, std::vector<Point>);
 bool doIntersect(Segment, Segment);
 bool isGoodDiagonal(Segment, std::vector<Segment>, std::vector<Point>);
 Segment getBiggestSegmentPossible(std::vector<Point>);  // Everything integrated
+void writeToFile(std::vector<Segment>, Segment);
+void draw();
 
 #endif /* GEOMETRY_HPP */
