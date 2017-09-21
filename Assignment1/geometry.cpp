@@ -1,7 +1,7 @@
 #include "geometry.hpp"
 #include <algorithm>
-#include <fstream>
 #include <cstdlib>
+#include <fstream>
 
 using namespace std;
 
@@ -333,7 +333,8 @@ void writeToFile(std::vector<Segment> polygon, Segment diagonal)
     myfile.close();
 }
 
-void draw(){
+void draw()
+{
     /**
      * Draw the polygon and the diagonal using mat plot lib and hacked up code ran using system()
      */
