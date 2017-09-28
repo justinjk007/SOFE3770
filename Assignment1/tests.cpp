@@ -198,7 +198,6 @@ TEST_CASE("Integration test")  // TODO change pow to **
     Segment answer4 = getBiggestSegmentPossible(input4);
     Segment answer5 = getBiggestSegmentPossible(input5);
     Segment answer6 = getBiggestSegmentPossible(input6);
-    Segment answer8 = getBiggestSegmentPossible(input8);
 
     auto start                       = chrono::high_resolution_clock::now();  // Start clock
     Segment answer7                  = getBiggestSegmentPossible(input7);
