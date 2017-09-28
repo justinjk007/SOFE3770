@@ -98,7 +98,7 @@ Segment findBiggestEdge(std::vector<Segment> all_edges)
      * Returns the biggest edge of the polygon as a segment object.
      */
     Segment current_biggest = all_edges[1];
-    for (auto& segment : all_edges)  // access vector by reference to avoid copying?
+    for (auto& segment : all_edges)  // access vector by reference to avoid copying
     {
         current_biggest = (compareSegments(current_biggest, segment));
     }
@@ -142,7 +142,7 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
                 Segment diagonal_line = {point_one, *it2};
                 diagonals.push_back(diagonal_line);
             }
-            it1 = temp_it;  // Reset it11 to its begining position
+            it1 = temp_it;  // Reset it1 to its begining position
         }
     }
 
@@ -280,34 +280,34 @@ Segment getBiggestSegmentPossible(std::vector<Point> points)
     /**
      * This method integrates all other method to find the biggest
      * line that can draw along a polygon.
-     */
-    Segment biggest_line;
-    size_t num              = points.size();  // Get the vectors size
-    vector<Segment> polygon = generateEdges(points);
-    biggest_line            = findBiggestEdge(polygon);
-
-    if (num <= 2) {
-        cout << "\nINVALID POLYGON\n";
-        exit(1);
-    }
-    if (num == 3) {
-        return biggest_line;
-    }
-
-    vector<Segment> diagonals = generateDiagonals(points);
-    std::sort(diagonals.begin(), diagonals.end(), compareSeg);
-
-    while (diagonals.size() > 0) {
-        Segment current = diagonals.back();
-        diagonals.pop_back();
-        if (!isGoodDiagonal(current, polygon, points)) {
-            if (current.getLength() > biggest_line.getLength()) return current;
-        } else {
-            continue;
-        }
-    }
-    return biggest_line;
-}
+     */																			// Big-O Analysis
+    Segment biggest_line;														//	1 -constant time
+    size_t num              = points.size();  // Get the vectors size			//	1
+    vector<Segment> polygon = generateEdges(points);							//	n
+    biggest_line            = findBiggestEdge(polygon);							//	n	
+																				//	--
+    if (num <= 2) {																//	1
+        cout << "\nINVALID POLYGON\n";											//	1
+        exit(1);																//	1
+    }																			//	--
+    if (num == 3) {																//	1
+        return biggest_line;													//	1
+    }																			//	--
+																				//	--
+    vector<Segment> diagonals = generateDiagonals(points);						//	[n*(n-3)]/2
+    std::sort(diagonals.begin(), diagonals.end(), compareSeg);					//	n log n
+																				//	--
+    while (diagonals.size() > 0) {												//	[n*(n-3)]/2
+        Segment current = diagonals.back();										//	([n*(n-3)]/2) - 1
+        diagonals.pop_back();													//	([n*(n-3)]/2) - 1
+        if (!isGoodDiagonal(current, polygon, points)) {						//	([n*(n-3)]/2) - 1
+            if (current.getLength() > biggest_line.getLength()) return current;	//	([n*(n-3)]/2) - 1
+        } else {																//	--
+            continue;															//	1
+        }																		//	--
+    }																			//	--
+    return biggest_line;														//	1
+}																				// Final runtime: O(n^2)
 
 void writeToFile(std::vector<Segment> polygon, Segment diagonal)
 {
@@ -338,6 +338,6 @@ void draw()
     /**
      * Draw the polygon and the diagonal using mat plot lib and hacked up code ran using system()
      */
-    cout << "\nDrawing ploygon in matplotlib\n";
+    cout << "\nDrawing polygon in matplotlib\n";
     system("python plot_lines.py");
 }
