@@ -31,7 +31,6 @@ bool compareSeg(Segment, Segment);
 std::vector<Segment> generateDiagonals(std::vector<Point>);
 Segment findBiggestSegment(std::vector<Segment>);
 int isLeft(Point, Point, Point);
-bool pointIsOutside(Point, std::vector<Point>);
 bool pointIsOutside(Point, Polygon_2);
 bool isGoodDiagonal(Segment, std::vector<Segment>, std::vector<Point>);
 Segment getBiggestSegmentPossible(std::vector<Point>);  // Everything integrated
