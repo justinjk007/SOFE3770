@@ -55,8 +55,8 @@ int main()
 
     //	Output length and start/end points of largest segment
     cout << "Longest segment found: \n";
-    cout << "Length: " << result.getLength() << "\n";
-    cout << "Points: " << result.start << " -      " << result.end;
+    cout << "Length: " << getLength(result) << "\n";
+    cout << "Points: " << result.source() << " -      " << result.target();
     cout << "\n------ Elapsed time: " << elapsed.count() << " s ------\n";
 
     vector<Segment> edges = generateEdges(given_points);

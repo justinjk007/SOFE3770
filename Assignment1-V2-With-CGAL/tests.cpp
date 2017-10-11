@@ -26,7 +26,7 @@ TEST_CASE("Testing Segment::getLength()")
 
     Segment line1(c, d);
 
-    REQUIRE(line1.getLength() == Approx(3992.004509).epsilon(0.0001));  // Epsilon is tolerance
+    REQUIRE(getLength(line1) == Approx(3992.004509).epsilon(0.0001));  // Epsilon is tolerance
 }
 
 TEST_CASE("Testing compareSegments()")
@@ -42,7 +42,7 @@ TEST_CASE("Testing compareSegments()")
 
     Segment ans = compareSegments(begin, other);
 
-    REQUIRE(ans.getLength() == other.getLength());
+    REQUIRE(getLength(ans) == getLength(other));
 }
 
 TEST_CASE("Testing generateDiagonals()")
@@ -75,7 +75,7 @@ TEST_CASE("Checking intersection methods")
     Segment single1 = {{-1, -2}, {3, 2}};
     Segment single2 = {{-3, -2}, {1, -2}};
 
-    REQUIRE(doIntersect(single1, single2) == true);
+    REQUIRE(CGAL::do_intersect(single1, single2) == true);
     REQUIRE(isGoodDiagonal(edges.front(), diagonals, pentagon) == false);
     REQUIRE(isGoodDiagonal(dummy, diagonals, pentagon) == false);
 }
@@ -213,9 +213,9 @@ TEST_CASE("Integration test")  // TODO change pow to **
     writeToFile(edges, answer7);
     draw();
 
-    REQUIRE(answer1.getLength() == Approx(76.157731059));
-    REQUIRE(answer2.getLength() == Approx(4510.149110617));
-    REQUIRE(answer3.getLength() == Approx(ans3.getLength()));
-    REQUIRE(answer4.getLength() == Approx(ans4.getLength()));
-    REQUIRE(answer5.getLength() == Approx(ans5.getLength()));
+    REQUIRE(getLength(answer1) == Approx(76.157731059));
+    REQUIRE(getLength(answer2) == Approx(4510.149110617));
+    REQUIRE(getLength(answer3) == Approx(getLength(ans3)));
+    REQUIRE(getLength(answer4) == Approx(getLength(ans4)));
+    REQUIRE(getLength(answer5) == Approx(getLength(ans5)));
 }

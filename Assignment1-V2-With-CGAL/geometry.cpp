@@ -10,46 +10,11 @@ double getEuclideanDistance(Point a, Point b)
     /**
      * This method returns the distance between two points.
      */
-    double diff1    = a.x - b.x;
-    double diff2    = a.y - b.y;
+    double diff1    = a.x() - b.x();
+    double diff2    = a.y() - b.y();
     double sum      = pow(diff1, 2) + pow(diff2, 2);
     double distance = sqrt(sum);
     return distance;
-}
-
-std::ostream& operator<<(std::ostream& os, const Point& point)
-{
-    /**
-     * Implements the output operator for the Point class.
-     */
-    os << "(" << point.x << ',' << point.y << ")" << endl;
-    return os;
-}
-
-std::ostream& operator<<(std::ostream& os, const Segment& segment)
-{
-    /**
-     * Implements the output operator for the Segment class.
-     */
-    os << "(" << segment.start.x << ',' << segment.start.y << ")";
-    os << " ------ ";
-    os << "(" << segment.end.x << ',' << segment.end.y << ")" << endl;
-    return os;
-}
-
-bool operator==(const Point& one, const Point& two)
-{
-    if (one.x == two.x && one.y == two.y) return true;
-    return false;
-}
-
-bool operator==(const Segment& one, const Segment& two)
-{
-    if (one.start == two.start && one.end == two.end)
-        return true;
-    else if (one.start == two.end && one.end == two.start)
-        return true;
-    return false;
 }
 
 Segment compareSegments(Segment a, Segment b)
@@ -57,7 +22,7 @@ Segment compareSegments(Segment a, Segment b)
     /*
      * Returns the Segment object with the largest length.
      */
-    if (a.getLength() >= b.getLength())
+    if (getLength(a) >= getLength(b))
         return a;
     else
         return b;
@@ -68,25 +33,27 @@ bool compareSeg(Segment a, Segment b)
     /**
      * This was written for vector::sort
      */
-    return (a.getLength() < b.getLength());
+    return (getLength(a) < getLength(b));
 }
 
-double Segment::getLength()
+double getLength(Segment line)
 {
     /**
      * Returns the length of the line given
      */
-    return this->length;
+    double s_l = line.squared_length();  // Sqaured length of the line
+    return sqrt(s_l);                    // Return length
 }
 
-Point Segment::getMidpoint()
+Point getMidpoint(Segment line)
 {
     /**
      * Returns the midpoint of this segment
      */
     int mx, my;
-    mx = (int)(double)(this->start.x + this->end.x) / 2;  // Calculate the mid-point of the line
-    my = (int)(double)(this->start.y + this->end.y) / 2;
+    mx = (int)(double)(line.source().x() + line.target().x()) /
+         2;  // Calculate the mid-point of the line
+    my = (int)(double)(line.source().y() + line.target().y()) / 2;
 
     Point point(mx, my);
     return point;
@@ -133,7 +100,7 @@ std::vector<Segment> generateDiagonals(std::vector<Point> polygon)
         vector<Point>::iterator it1 = polygon.begin();
         for (it1 = ++it1; it1 != polygon.end(); it1++) {
             Point point_one                 = *it1;
-            vector<Point>::iterator temp_it = it1;  // Temporarily store it until the end;
+            vector<Point>::iterator temp_it = it1;  // Temporarily store it until the target();
             if (++it1 != polygon.end())
                 it1++;  // Skip a point
             else
@@ -174,7 +141,7 @@ int isLeft(Point P0, Point P1, Point P2)
     /**
      *isLeft(): tests if a point is Left|On|Right of an infinite line.
      */
-    return ((P1.x - P0.x) * (P2.y - P0.y) - (P2.x - P0.x) * (P1.y - P0.y));
+    return (int)(double)((P1.x() - P0.x()) * (P2.y() - P0.y()) - (P2.x() - P0.x()) * (P1.y() - P0.y()));
 }
 
 bool pointIsOutside(Point P, std::vector<Point> polygon)
@@ -186,12 +153,12 @@ bool pointIsOutside(Point P, std::vector<Point> polygon)
     int cn = 0;  // the  crossing number counter
 
     for (auto V = polygon.begin(); V < polygon.end() - 1; ++V) {
-        if (((V[0].y <= P.y) && (V[1].y > P.y))        // an upward cross0ng
-            || ((V[0].y > P.y) && (V[1].y <= P.y))) {  // a downward cross0ng
+        if (((V[0].y() <= P.y()) && (V[1].y() > P.y()))        // an upward cross0ng
+            || ((V[0].y() > P.y()) && (V[1].y() <= P.y()))) {  // a downward cross0ng
             // compute  the actual edge-ray intersect x-coordinate
-            float vt = (float)(P.y - V[0].y) / (V[1].y - V[0].y);
-            if (P.x < V[0].x + vt * (V[1].x - V[0].x))  // P.x < 0ntersect
-                ++cn;                                   // a valid crossing of y=P.y right of P.x
+            double vt = (double)(P.y() - V[0].y()) / (V[1].y() - V[0].y());
+            if (P.x() < V[0].x() + vt * (V[1].x() - V[0].x()))  // P.x() < 0ntersect
+                ++cn;  // a valid crossing of y=P.y() right of P.x()
         }
     }
 
@@ -200,60 +167,24 @@ bool pointIsOutside(Point P, std::vector<Point> polygon)
     return false;
 }
 
-bool onSegment(Point p, Point q, Point r)
+bool pointIsOutside(Point point, Polygon_2 polygon)
 {
     /**
-     * Check if point r is on the line segment made by point p and q.
+     * Check if the given point is outside a polygon
      */
-    if (q.x <= max(p.x, r.x) && q.x >= min(p.x, r.x) && q.y <= max(p.y, r.y) &&
-        q.y >= min(p.y, r.y))
-        return true;
+    CGAL::Bounded_side bside = polygon.bounded_side(point);
+    if (bside == CGAL::ON_BOUNDED_SIDE) {
+        // point inside
+	return false;
+    } else if (bside == CGAL::ON_BOUNDARY) {
+        // point on the border
+	return false;
+    } else if (bside == CGAL::ON_UNBOUNDED_SIDE) {
+        // point outside
+	return true;
+    }
+    std::cout << "IT got here, this is bad ans should not happen\n";
     return false;
-}
-
-int orientation(Point p, Point q, Point r)
-{
-    /**
-     * To find orientation of ordered triplet (p, q, r).
-     * The function returns following values
-     * 0 --> p, q and r are colinear
-     * 1 --> Clockwise
-     * 2 --> Counterclockwise
-     */
-    int val = (int)(double)(q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-    // Cast explicitly without warnings
-    if (val == 0) return 0;    // colinear
-    return (val > 0) ? 1 : 2;  // clock or counterclock wise
-}
-
-bool doIntersect(Segment a, Segment b)
-{
-    /**
-     * Find the four orientations needed for general and special
-     * cases, and returns true if the line segments intersect.
-     */
-    Point p1 = a.start;
-    Point q1 = a.end;
-    Point p2 = b.start;
-    Point q2 = b.end;
-
-    int o1 = orientation(p1, q1, p2);
-    int o2 = orientation(p1, q1, q2);
-    int o3 = orientation(p2, q2, p1);
-    int o4 = orientation(p2, q2, q1);
-
-    // General case
-    if (o1 != o2 && o3 != o4) return true;
-    // Special Cases
-    // p1, q1 and p2 are colinear and p2 lies on segment p1q1
-    if (o1 == 0 && onSegment(p1, p2, q1)) return true;
-    // p1, q1 and p2 are colinear and q2 lies on segment p1q1
-    if (o2 == 0 && onSegment(p1, q2, q1)) return true;
-    // p2, q2 and p1 are colinear and p1 lies on segment p2q2
-    if (o3 == 0 && onSegment(p2, p1, q2)) return true;
-    // p2, q2 and q1 are colinear and q1 lies on segment p2q2
-    if (o4 == 0 && onSegment(p2, q1, q2)) return true;
-    return false;  // Doesn't fall in any of the above cases
 }
 
 bool isGoodDiagonal(Segment segment, std::vector<Segment> checkable, std::vector<Point> polygon)
@@ -262,10 +193,10 @@ bool isGoodDiagonal(Segment segment, std::vector<Segment> checkable, std::vector
      * Check if the given segment intersects with any of the given lines
      */
     for (auto& checking : checkable) {
-        if (pointIsOutside(segment.getMidpoint(), polygon))
+        if (pointIsOutside(getMidpoint(segment), polygon)) // TODO: Change this to the newly implemented cgal overload
             return true;
-        else if (checking.start == segment.start || checking.end == segment.end ||
-                 checking.start == segment.end || checking.end == segment.start)
+        else if (checking.source() == segment.source() || checking.target() == segment.target() ||
+                 checking.source() == segment.target() || checking.target() == segment.source())
             return false;  // Special case where the intersection is happening at the end/start
         else if (CGAL::do_intersect(checking, segment))
             return true;
@@ -301,7 +232,7 @@ Segment getBiggestSegmentPossible(std::vector<Point> points)
         Segment current = diagonals.back();                     //	([n*(n-3)]/2) - 1
         diagonals.pop_back();                                   //	([n*(n-3)]/2) - 1
         if (!isGoodDiagonal(current, polygon, points)) {        //	([n*(n-3)]/2) - 1
-            if (current.getLength() > biggest_line.getLength())
+            if (getLength(current) > getLength(biggest_line))
                 return current;  //	([n*(n-3)]/2) - 1
         } else {                 //	--
             continue;            //	1
@@ -321,14 +252,14 @@ void writeToFile(std::vector<Segment> polygon, Segment diagonal)
     myfile.open(file_name);
     myfile << "x,y\n";
     // Write Diagonal
-    myfile << diagonal.start.x << "," << diagonal.start.y << "\n";
-    myfile << diagonal.end.x << "," << diagonal.end.y << "\n";
+    myfile << diagonal.source().x() << "," << diagonal.source().y() << "\n";
+    myfile << diagonal.target().x() << "," << diagonal.target().y() << "\n";
 
     // Write edges of the polygon
     vector<Segment>::iterator it = polygon.begin();
     while (it != polygon.end()) {
-        myfile << it->start.x << "," << it->start.y << "\n";
-        myfile << it->end.x << "," << it->end.y << "\n";
+        myfile << it->source().x() << "," << it->source().y() << "\n";
+        myfile << it->target().x() << "," << it->target().y() << "\n";
         ++it;
     }
     myfile.close();
