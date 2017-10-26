@@ -29,8 +29,7 @@ TEST_CASE("Convex Hull")
     vector<Point> hull_gen = getConvexHull(points);
     vector<Point> hull     = {{0, 0}, {14, 2}, {13, 6}, {9, 9}, {2, 10}};  // Correct hull
 
-    print(hull_gen);
-    // REQUIRE(hull_gen == hull);
+    REQUIRE(hull_gen == hull);
 }
 
 TEST_CASE("Testing PointOfBestFit")
