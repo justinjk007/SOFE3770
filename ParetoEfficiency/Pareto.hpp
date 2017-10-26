@@ -7,10 +7,10 @@
 using namespace std;
 
 /*
-* This class is an implementation of the Point object with two constructors, one empty and one
-* requiring specific x and y values as parameters. Each object keeps track of its x and y
-* coordinates.
-*/
+ * This class is an implementation of the Point object with two constructors, one empty and one
+ * requiring specific x and y values as parameters. Each object keeps track of its x and y
+ * coordinates.
+ */
 class Point
 {
    private:
@@ -50,5 +50,8 @@ vector<Point> sortedPointList(vector<Point> all_points, char axis);
 // Sort parameter identifiers for std::sort
 bool compareByX(Point a, Point b);
 bool compareByY(Point a, Point b);
+
+// Identifies the point of best fit
+Point pointOfBestFit(vector<Point> convexHull);
 
 #endif /* PARETO_HPP */
