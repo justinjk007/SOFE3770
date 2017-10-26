@@ -1,6 +1,10 @@
 /Assignment1/build
-/Assignment2/build
 /Assignment1-V2-With-CGAL/build
+/Assignment1/bin
+/Assignment1-V2-With-CGAL/bin
+
+/ParetoEfficiency/build
+/ParetoEfficiency/bin
 
 GPATH
 GRTAGS
