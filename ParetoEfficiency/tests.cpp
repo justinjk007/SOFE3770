@@ -17,7 +17,7 @@ TEST_CASE("Sample Test")  // Delete this
 
 TEST_CASE("Check conversion methods")
 {
-    vector<Point> points        = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
     vector<Point_2> cgal_points = changePointType(points);
     vector<Point> points_after  = changePointType(cgal_points);
@@ -25,7 +25,7 @@ TEST_CASE("Check conversion methods")
 
 TEST_CASE("Convex Hull")
 {
-    vector<Point> points   = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
     vector<Point> hull_gen = getConvexHull(points);
     vector<Point> hull     = {{0, 0}, {14, 2}, {13, 6}, {9, 9}, {2, 10}};  // Correct hull
@@ -37,7 +37,7 @@ TEST_CASE("Testing least dominant point")
 {
     vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
-    Point result         = pointSmallestXY(points);
+    Point result = pointSmallestXY(points);
     Point testResult(0, 0);
 
     // REQUIRE(result == testResult);
@@ -47,7 +47,7 @@ TEST_CASE("Testing Small X Large Y point function")
 {
     vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
-    Point result         = pointSmallestLargestXY(points);
+    Point result = pointSmallestLargestXY(points);
     Point testResult(2, 10);
 
     // REQUIRE(result == testResult);
@@ -57,7 +57,7 @@ TEST_CASE("Testing Large X Small Y point function")
 {
     vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
-    Point result         = pointLargestSmallestXY(points);
+    Point result = pointLargestSmallestXY(points);
     Point testResult(14, 2);
 
     // REQUIRE(result == testResult);
@@ -84,8 +84,7 @@ TEST_CASE("Testing Integration low low")
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
 
     vector<Point> frontier = getParetoFrontierLL(points);
-    print(frontier);
-    draw(points, frontier);
+    // draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration high high")
@@ -95,8 +94,7 @@ TEST_CASE("Testing Integration high high")
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
 
     vector<Point> frontier = getParetoFrontierHH(points);
-    print(frontier);
-    draw(points, frontier);
+    // draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration low high")
@@ -106,8 +104,7 @@ TEST_CASE("Testing Integration low high")
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
 
     vector<Point> frontier = getParetoFrontierLH(points);
-    print(frontier);
-    draw(points, frontier);
+    // draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration high low")
@@ -117,8 +114,7 @@ TEST_CASE("Testing Integration high low")
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
 
     vector<Point> frontier = getParetoFrontierHL(points);
-    print(frontier);
-    draw(points, frontier);
+    // draw(points, frontier);
 }
 
 TEST_CASE("Sets of Point Vectors")
@@ -142,4 +138,18 @@ TEST_CASE("Sets of Point Vectors")
     vector<int> sValues = {0, 2, 2, 3, 3, 5, 5, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 10, 10, 11};
     vector<int> tValues = {0, 9, 10, 2, 5, 5, 7, 4, 6, 3, 5, 7, 8, 3, 4, 5, 2, 3, 5, 2};
     // convex hull values should be 0,0  11,2  10,5  7,8  2,10
+
+    vector<Point> points1 = populateList(uValues, vValues);
+    vector<Point> points2 = populateList(xValues, yValues);
+    vector<Point> points3 = populateList(aValues, bValues);
+    vector<Point> points4 = populateList(sValues, tValues);
+
+    vector<Point> frontier1 = getParetoFrontierLL(points4);
+    vector<Point> frontier2 = getParetoFrontierHH(points4);
+    vector<Point> frontier3 = getParetoFrontierLH(points4);
+    vector<Point> frontier4 = getParetoFrontierHL(points4);
+    draw(points4, frontier1);
+    draw(points4, frontier2);
+    draw(points4, frontier3);
+    draw(points4, frontier4);
 }
