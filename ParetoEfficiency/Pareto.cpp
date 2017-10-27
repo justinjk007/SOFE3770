@@ -222,7 +222,6 @@ vector<Point> getParetoFrontierLL(vector<Point> points)
         current = hull[i % h_size];  // This will make the iteration wrap around like a circle
     }
     frontier.push_back(end);          // Add the last point
-    number_of_frontier_points = ++i;  // Don't delete this we need it
 
     return frontier;
 }
@@ -252,7 +251,6 @@ vector<Point> getParetoFrontierHH(vector<Point> points)
         current = hull[i % h_size];  // This will make the iteration wrap around like a circle
     }
     frontier.push_back(end);          // Add the last point
-    number_of_frontier_points = ++i;  // Don't delete this we need it
 
     return frontier;
 }
@@ -283,7 +281,6 @@ vector<Point> getParetoFrontierLH(vector<Point> points)
         current = hull[i % h_size];  // This will make the iteration wrap around like a circle
     }
     frontier.push_back(end);          // Add the last point
-    number_of_frontier_points = ++i;  // Don't delete this we need it
 
     return frontier;
 }
@@ -314,7 +311,6 @@ vector<Point> getParetoFrontierHL(vector<Point> points)
         current = hull[i % h_size];  // This will make the iteration wrap around like a circle
     }
     frontier.push_back(end);          // Add the last point
-    number_of_frontier_points = ++i;  // Don't delete this we need it
 
     return frontier;
 }

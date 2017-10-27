@@ -4,6 +4,7 @@
 #include "ConvexHull.hpp"
 #include "Pareto.hpp"
 #include "catch.hpp"
+#include "Plot.hpp"
 
 using namespace std;
 
@@ -84,6 +85,7 @@ TEST_CASE("Testing Integration low low")
 
     vector<Point> frontier = getParetoFrontierLL(points);
     print(frontier);
+    draw(points,frontier);
 }
 
 TEST_CASE("Testing Integration high high")
@@ -94,6 +96,7 @@ TEST_CASE("Testing Integration high high")
 
     vector<Point> frontier = getParetoFrontierHH(points);
     print(frontier);
+    draw(points,frontier);
 }
 
 TEST_CASE("Testing Integration low high")
@@ -104,6 +107,7 @@ TEST_CASE("Testing Integration low high")
 
     vector<Point> frontier = getParetoFrontierLH(points);
     print(frontier);
+    draw(points,frontier);
 }
 
 TEST_CASE("Testing Integration high low")
@@ -114,4 +118,5 @@ TEST_CASE("Testing Integration high low")
 
     vector<Point> frontier = getParetoFrontierHL(points);
     print(frontier);
+    draw(points,frontier);
 }

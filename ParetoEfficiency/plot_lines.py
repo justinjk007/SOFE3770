@@ -17,14 +17,6 @@ def parse(file_name):
     file.close()
     return rawData
 
-def draw(xCords, yCords, xLabel, yLabel, filename, col):
-    plt.xlabel(xLabel)
-    plt.ylabel(yLabel)
-    plt.title("Polygon")
-    plt.plot(xCords, yCords, '-o', color=col, markersize = 1, linewidth = 2)
-    # for xy in zip(xCords, yCords):                                       # <--
-    #     ax.annotate('(%s, %s)' % xy, xy=xy, textcoords='data') # <--
-
 def toXandY(unorderedData):
     "This method converts seperates x and y co-ordinates for plotting"
     orderedData = []
@@ -39,36 +31,30 @@ def toXandY(unorderedData):
 
 def main():
     newData = []
-    line_x = []
-    line_y = []
-    diagonal_x = []
-    diagonal_y = []
-    file_name = "rawData.csv"
+    f_line_x = []
+    f_line_y = []
+    file_name = "data.csv"
     data = parse(file_name)   # Calling the parse funtion we made
     labels = data.pop(0)            # Necessary evil
+    frontier_size = int(data.pop(0)[0])
     list_size = len(data)
     for i in range(0, list_size):    # Converting the string list to float
         newData.append([])          # Add a new sublsit every time
         for j in range(0, 2):       # Append converted data to the new list
             newData[i].append(float(data[i][j]))
     DataXandY = toXandY(newData)     # DataXandY -> [[Xs][Ys]]
-    diagonal_x.append(DataXandY[0].pop(0))
-    diagonal_y.append(DataXandY[1].pop(0))
-    diagonal_x.append(DataXandY[0].pop(0))
-    diagonal_y.append(DataXandY[1].pop(0))
-    while len(DataXandY[0]) != 0:
-        # Pop two points to form a line
-        line_x.append(DataXandY[0].pop(0))
-        line_y.append(DataXandY[1].pop(0))
-        line_x.append(DataXandY[0].pop(0))
-        line_y.append(DataXandY[1].pop(0))
-        draw(line_x, line_y, labels[0], labels[1], file_name, "g")
-        line_x[:] = []          # Delete the contents
-        line_y[:] = []          # Delete the contents
+    i = 0
+    while i < frontier_size:
+        i+=1
+        f_line_x.append(DataXandY[0].pop(0))
+        f_line_y.append(DataXandY[1].pop(0))
 
-    draw(diagonal_x, diagonal_y, labels[0], labels[1], file_name, "r") # Draw the diagonal
-    # plt.xlim(-5, 15)
-    # plt.ylim(-5, 15)
+    plt.xlabel(labels[0])
+    plt.ylabel(labels[1])
+    plt.title("Pareto dominance")
+    plt.plot(DataXandY[0], DataXandY[1], "o", color="g") # Plot all points
+    plt.plot(f_line_x, f_line_y, "-o", color="r") # Plot frontier line
+
     plt.gca().set_aspect('equal', adjustable='box')
     plt.show()
 
