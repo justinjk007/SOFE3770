@@ -1,6 +1,8 @@
 # Assignment 2 - Pareto Efficiency
 
-![Pareto dominance solution](../../img/paretaparetoo.png "Dominant set of points for high-high dominance")
+<p align="center">
+  <img src="../img/paretaparetoo.png" alt="Pareto dominance solution"/>
+</p>
 
 This assignment deals with Pareto optimization algorithm used for
 multi-objective optmization problems. We were able to come up with an

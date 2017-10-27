@@ -1,6 +1,8 @@
 # Assignment 1 - Using CGAL
 
-![Assignment 1 solution](../../img/issland.png "Example island with the biggest landing strip")
+<p align="center">
+  <img src="../img/issland.png" alt="Assignment 1 solution"/>
+</p>
 
 Deals with this unique problem Dr. Shahryar shared with us. Our
 objective is to draw the biggest line possible in a given island. The
