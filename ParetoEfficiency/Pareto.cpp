@@ -230,7 +230,7 @@ vector<Point> getParetoFrontierLL(vector<Point> points)
 vector<Point> getParetoFrontierHH(vector<Point> points)
 {
     /**
-     * Get the Pareto Frontier where X and Y and supposed to be HIGH to be dominant
+     * Get the Pareto Frontier where X and Y are supposed to be HIGH to be dominant
      */
     vector<Point> frontier;
     vector<Point> hull = getConvexHull(points);
