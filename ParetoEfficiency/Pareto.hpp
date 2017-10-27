@@ -14,17 +14,17 @@ using namespace std;
 class Point
 {
    private:
-    int x, y;
+    double x, y;
 
-   public:
+public:
     // Defines os << operator for a Point object.
     friend ostream& operator<<(ostream& os, const Point&);
     // Defines == operator for a Point object.
     friend bool operator==(const Point&, const Point&);
 
     // Accessors to the private attributes
-    int getX();
-    int getY();
+    double getX();
+    double getY();
 
     // Empty/Default Constructor.
     Point()
@@ -34,7 +34,7 @@ class Point
     }
 
     // Constructor with specified x and y coordinates.
-    Point(int x_value, int y_value)
+    Point(double x_value, double y_value)
     {
         this->x = x_value;
         this->y = y_value;

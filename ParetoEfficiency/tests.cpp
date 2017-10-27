@@ -16,7 +16,7 @@ TEST_CASE("Sample Test")  // Delete this
 
 TEST_CASE("Check conversion methods")
 {
-    vector<Point> points        = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
     vector<Point_2> cgal_points = changePointType(points);
     vector<Point> points_after  = changePointType(cgal_points);
@@ -24,7 +24,7 @@ TEST_CASE("Check conversion methods")
 
 TEST_CASE("Convex Hull")
 {
-    vector<Point> points   = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
     vector<Point> hull_gen = getConvexHull(points);
     vector<Point> hull     = {{0, 0}, {14, 2}, {13, 6}, {9, 9}, {2, 10}};  // Correct hull
@@ -32,11 +32,42 @@ TEST_CASE("Convex Hull")
     REQUIRE(hull_gen == hull);
 }
 
-TEST_CASE("Testing Smallest Point identifier function")
+TEST_CASE("Testing least dominant point")
 {
-    vector<Point> test = {{0, 0}, {9, 2}, {14, 2}, {13, 6}, {11, 7}, {9, 9}, {2, 10}};
-    Point result       = pointSmallestXY(test);
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+                            {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
+    Point result = pointSmallestXY(points);
     Point testResult(0, 0);
+
+    REQUIRE(result == testResult);
+}
+
+TEST_CASE("Testing Small X Large Y point function")
+{
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+                            {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
+    Point result = pointSmallestLargestXY(points);
+    Point testResult(2, 10);
+
+    REQUIRE(result == testResult);
+}
+
+TEST_CASE("Testing Large X Small Y point function")
+{
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+                            {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
+    Point result = pointLargestSmallestXY(points);
+    Point testResult(14, 2);
+
+    REQUIRE(result == testResult);
+}
+
+TEST_CASE("Testing Most dominant point")
+{
+    vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
+                            {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
+    Point result = pointLargestXY(points);
+    Point testResult(13, 6); // OR 14,2 ???
 
     REQUIRE(result == testResult);
 }
