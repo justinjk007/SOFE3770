@@ -7,7 +7,7 @@ using namespace std;
 /*
  * Method used to access private attribute of a Point object.
  */
-int Point::getX()
+double Point::getX()
 {
     return this->x;
 }
@@ -15,7 +15,7 @@ int Point::getX()
 /*
  * Method used to access private attribute of a Point object.
  */
-int Point::getY()
+double Point::getY()
 {
     return this->y;
 }
