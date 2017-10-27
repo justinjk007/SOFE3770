@@ -1,5 +1,5 @@
 #include "Plot.hpp"
-#include <cstdlib> // For sys calls
+#include <cstdlib>  // For sys calls
 #include <fstream>
 
 void writeToFile(vector<Point> points, vector<Point> frontier)
