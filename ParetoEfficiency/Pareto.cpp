@@ -1,6 +1,7 @@
 #include "Pareto.hpp"
 #include <algorithm>
 #include <vector>
+#include "ConvexHull.hpp"
 
 using namespace std;
 
@@ -189,4 +190,126 @@ Point pointLargestXY(vector<Point> convexHull)
         }
     }
     return bestFit;
+}
+
+vector<Point> getParetoFrontierLL(vector<Point> points)
+{
+    /**
+     * Get the Pareto Frontier where X and Y and supposed to be LOW to be dominant
+     */
+    vector<Point> frontier;
+    vector<Point> hull = getConvexHull(points);
+    int h_size         = hull.size();
+
+    // Find the end points of the dominant frontier
+    Point start = pointSmallestLargestXY(hull);
+    Point end   = pointLargestSmallestXY(hull);
+
+    // Find the index of the start point
+    int start_i = find(hull.begin(), hull.end(), start) - hull.begin();  // Big-O(n)
+
+    // Now traverse through the convex hull from start to end point to get the frontier
+    Point current = hull[start_i];
+    int i;
+    for (i = start_i; !(current == end);) {
+        frontier.push_back(current);
+        i++;
+        current = hull[i % h_size];  // This will make the iteration wrap around like a circle
+    }
+    frontier.push_back(end);          // Add the last point
+    number_of_frontier_points = ++i;  // Don't delete this we need it
+
+    return frontier;
+}
+
+vector<Point> getParetoFrontierHH(vector<Point> points)
+{
+    /**
+     * Get the Pareto Frontier where X and Y and supposed to be HIGH to be dominant
+     */
+    vector<Point> frontier;
+    vector<Point> hull = getConvexHull(points);
+    int h_size         = hull.size();
+
+    // Find the end points of the dominant frontier
+    Point start = pointLargestSmallestXY(hull);
+    Point end   = pointSmallestLargestXY(hull);
+
+    // Find the index of the start point
+    int start_i = find(hull.begin(), hull.end(), start) - hull.begin();  // Big-O(n)
+
+    // Now traverse through the convex hull from start to end point to get the frontier
+    Point current = hull[start_i];
+    int i;
+    for (i = start_i; !(current == end);) {
+        frontier.push_back(current);
+        i++;
+        current = hull[i % h_size];  // This will make the iteration wrap around like a circle
+    }
+    frontier.push_back(end);          // Add the last point
+    number_of_frontier_points = ++i;  // Don't delete this we need it
+
+    return frontier;
+}
+
+vector<Point> getParetoFrontierLH(vector<Point> points)
+{
+    /**
+     * Get the Pareto Frontier where X and Y and supposed to be LOW
+     * and HIGH respectively to be dominant
+     */
+    vector<Point> frontier;
+    vector<Point> hull = getConvexHull(points);
+    int h_size         = hull.size();
+
+    // Find the end points of the dominant frontier
+    Point start = pointLargestXY(hull);
+    Point end   = pointSmallestXY(hull);
+
+    // Find the index of the start point
+    int start_i = find(hull.begin(), hull.end(), start) - hull.begin();  // Big-O(n)
+
+    // Now traverse through the convex hull from start to end point to get the frontier
+    Point current = hull[start_i];
+    int i;
+    for (i = start_i; !(current == end);) {
+        frontier.push_back(current);
+        i++;
+        current = hull[i % h_size];  // This will make the iteration wrap around like a circle
+    }
+    frontier.push_back(end);          // Add the last point
+    number_of_frontier_points = ++i;  // Don't delete this we need it
+
+    return frontier;
+}
+
+vector<Point> getParetoFrontierHL(vector<Point> points)
+{
+    /**
+     * Get the Pareto Frontier where X and Y and supposed to be HIGH
+     * and LOW respectively to be dominant
+     */
+    vector<Point> frontier;
+    vector<Point> hull = getConvexHull(points);
+    int h_size         = hull.size();
+
+    // Find the end points of the dominant frontier
+    Point start = pointSmallestXY(hull);
+    Point end   = pointLargestXY(hull);
+
+    // Find the index of the start point
+    int start_i = find(hull.begin(), hull.end(), start) - hull.begin();  // Big-O(n)
+
+    // Now traverse through the convex hull from start to end point to get the frontier
+    Point current = hull[start_i];
+    int i;
+    for (i = start_i; !(current == end);) {
+        frontier.push_back(current);
+        i++;
+        current = hull[i % h_size];  // This will make the iteration wrap around like a circle
+    }
+    frontier.push_back(end);          // Add the last point
+    number_of_frontier_points = ++i;  // Don't delete this we need it
+
+    return frontier;
 }
