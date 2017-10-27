@@ -1,6 +1,6 @@
 # Assignment 1
 
-![Assignment 1 solution](../../img/issland.png "Example island with the biggest landing strip")
+![Assignment 1 solution](../img/issland.png?raw=true "Example island with the biggest landing strip")
 
 Deals with this unique problem Dr. Shahryar shared with us. Our
 objective is to draw the biggest line possible in a given island. The
