@@ -3,6 +3,12 @@ PROJECT (Assignment1-V2)
 
 SET (CMAKE_CXX_STANDARD 11)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+MESSAGE("-- Copied python script for plotting")
+
 # CGAL config
 # For linux CGAL to work also install package " libcgal-qt5-dev " as well
 FIND_PACKAGE(CGAL REQUIRED)

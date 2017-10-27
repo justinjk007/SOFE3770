@@ -3,6 +3,12 @@ PROJECT (Assignment1)
 
 SET (CMAKE_CXX_STANDARD 11)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+MESSAGE("-- Copied python script for plotting")
+
 ADD_LIBRARY(geometry geometry.cpp)
 
 ADD_EXECUTABLE(main main.cpp)
