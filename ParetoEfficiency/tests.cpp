@@ -3,8 +3,8 @@
 #include <iostream>
 #include "ConvexHull.hpp"
 #include "Pareto.hpp"
-#include "catch.hpp"
 #include "Plot.hpp"
+#include "catch.hpp"
 
 using namespace std;
 
@@ -68,7 +68,7 @@ TEST_CASE("Testing Most dominant point")
     vector<Point> points = {{0, 0}, {2, 2},  {3, 6},  {2, 10}, {6, 4}, {9, 2},
                             {9, 9}, {11, 5}, {11, 7}, {13, 6}, {14, 2}};
 
-    Point result         = pointLargestXY(points);
+    Point result = pointLargestXY(points);
     Point testResult(13, 6);
 
     // REQUIRE(result == testResult);
@@ -85,7 +85,7 @@ TEST_CASE("Testing Integration low low")
 
     vector<Point> frontier = getParetoFrontierLL(points);
     print(frontier);
-    draw(points,frontier);
+    draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration high high")
@@ -96,7 +96,7 @@ TEST_CASE("Testing Integration high high")
 
     vector<Point> frontier = getParetoFrontierHH(points);
     print(frontier);
-    draw(points,frontier);
+    draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration low high")
@@ -107,7 +107,7 @@ TEST_CASE("Testing Integration low high")
 
     vector<Point> frontier = getParetoFrontierLH(points);
     print(frontier);
-    draw(points,frontier);
+    draw(points, frontier);
 }
 
 TEST_CASE("Testing Integration high low")
@@ -118,5 +118,5 @@ TEST_CASE("Testing Integration high low")
 
     vector<Point> frontier = getParetoFrontierHL(points);
     print(frontier);
-    draw(points,frontier);
+    draw(points, frontier);
 }
