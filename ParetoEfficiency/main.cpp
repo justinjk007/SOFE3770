@@ -45,7 +45,7 @@ int main()
 	cout << "Case '2' - low u high v \n";
 	cout << "Case '3' - high u low v \n";
 	cout << "Case '4' - high u high v \n";
-	cout << "Please select which case you would like: ";
+	cout << "Please select which case you would like: \n";
 	int caseNum;
 	cin >> caseNum;
 	vector <Point> result;
