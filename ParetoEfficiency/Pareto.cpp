@@ -92,9 +92,9 @@ bool compareByY(Point a, Point b)
 }
 
 /*
- * Description
+ * Traverses all convex hull points to find smallest x and y value point.
  */
-Point pointOfBestFit(vector<Point> convexHull)
+Point pointSmallestXY(vector<Point> convexHull)
 {
     Point bestFit = convexHull[0];
     for (auto& point : convexHull) {
@@ -107,6 +107,81 @@ Point pointOfBestFit(vector<Point> convexHull)
         else if (point.getX() == bestFit.getX()) {
             // Check secondary value
             if (point.getY() < bestFit.getY()) {
+                bestFit = point;
+            }
+            // No else if here because it is not possible to have two points with identical x AND y
+            // values.
+        }
+    }
+    return bestFit;
+}
+
+/*
+ * Traverses all convex hull points to find largest x and smallest y value point.
+ */
+Point pointLargestSmallestXY(vector<Point> convexHull)
+{
+    Point bestFit = convexHull[0];
+    for (auto& point : convexHull) {
+        // Checking which point has the largest value to be the best point.
+        if (point.getX() > bestFit.getX()) {
+            bestFit = point;
+        }
+        // If both have the same value, check a secondary value to determine which point is the best
+        // point.
+        else if (point.getX() == bestFit.getX()) {
+            // Check secondary value
+            if (point.getY() < bestFit.getY()) {
+                bestFit = point;
+            }
+            // No else if here because it is not possible to have two points with identical x AND y
+            // values.
+        }
+    }
+    return bestFit;
+}
+
+/*
+ * Traverses all convex hull points to find smallest x and largest y value point.
+ */
+Point pointSmallestLargestXY(vector<Point> convexHull)
+{
+    Point bestFit = convexHull[0];
+    for (auto& point : convexHull) {
+        // Checking which point has the smallest value to be the best point.
+        if (point.getX() < bestFit.getX()) {
+            bestFit = point;
+        }
+        // If both have the same value, check a secondary value to determine which point is the best
+        // point.
+        else if (point.getX() == bestFit.getX()) {
+            // Check secondary value
+            if (point.getY() > bestFit.getY()) {
+                bestFit = point;
+            }
+            // No else if here because it is not possible to have two points with identical x AND y
+            // values.
+        }
+    }
+    return bestFit;
+}
+
+/*
+ * Traverses all convex hull points to find largest x and y value point.
+ */
+Point pointLargestXY(vector<Point> convexHull)
+{
+    Point bestFit = convexHull[0];
+    for (auto& point : convexHull) {
+        // Checking which point has the largest value to be the best point.
+        if (point.getX() > bestFit.getX()) {
+            bestFit = point;
+        }
+        // If both have the same value, check a secondary value to determine which point is the best
+        // point.
+        else if (point.getX() == bestFit.getX()) {
+            // Check secondary value
+            if (point.getY() > bestFit.getY()) {
                 bestFit = point;
             }
             // No else if here because it is not possible to have two points with identical x AND y
