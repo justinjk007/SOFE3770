@@ -61,8 +61,6 @@ Point pointLargestSmallestXY(vector<Point> convexHull);
 Point pointSmallestLargestXY(vector<Point> convexHull);
 Point pointLargestXY(vector<Point> convexHull);
 
-static int number_of_frontier_points = 0; // Don't delete this we need it
-
 vector<Point> getParetoFrontierLL(vector<Point>); // Low Low
 vector<Point> getParetoFrontierHH(vector<Point>); // High High
 vector<Point> getParetoFrontierLH(vector<Point>); // Low High
