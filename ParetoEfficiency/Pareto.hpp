@@ -16,7 +16,7 @@ class Point
    private:
     double x, y;
 
-public:
+   public:
     // Defines os << operator for a Point object.
     friend ostream& operator<<(ostream& os, const Point&);
     // Defines == operator for a Point object.
