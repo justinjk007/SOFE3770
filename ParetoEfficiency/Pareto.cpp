@@ -149,14 +149,14 @@ Point pointSmallestLargestXY(vector<Point> convexHull)
     Point bestFit = convexHull[0];
     for (auto& point : convexHull) {
         // Checking which point has the smallest value to be the best point.
-        if (point.getX() < bestFit.getX()) {
+        if (point.getY() > bestFit.getY()) {
             bestFit = point;
         }
         // If both have the same value, check a secondary value to determine which point is the best
         // point.
-        else if (point.getX() == bestFit.getX()) {
+        else if (point.getY() == bestFit.getY()) {
             // Check secondary value
-            if (point.getY() > bestFit.getY()) {
+            if (point.getX() < bestFit.getX()) {
                 bestFit = point;
             }
             // No else if here because it is not possible to have two points with identical x AND y
@@ -175,7 +175,12 @@ Point pointLargestXY(vector<Point> convexHull)
     for (auto& point : convexHull) {
         // Checking which point has the largest value to be the best point.
         if (point.getX() > bestFit.getX()) {
-            bestFit = point;
+            // bestFit = point;
+            // will not be largest x and y point if the y value is not larger than the current
+            // largest y value.
+            if (point.getY() > bestFit.getY()) {
+                bestFit = point;
+            }
         }
         // If both have the same value, check a secondary value to determine which point is the best
         // point.
