@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Pareto.cpp"
+#include "Plot.cpp"
 
 using namespace std;
 
@@ -53,20 +54,27 @@ int main()
 	if (caseNum == 1)
 	{
 		result = getParetoFrontierLL(pointList);
+		draw(pointList, result);
 	}
 	else if (caseNum == 2)
 	{
 		result = getParetoFrontierLH(pointList);
+		draw(pointList, result);
 	}
 	else if (caseNum == 3)
 	{
 		result = getParetoFrontierHL(pointList);
+		draw(pointList, result);
 	}
 	else if (caseNum == 4)
 	{
 		result = getParetoFrontierHH(pointList);
+		draw(pointList, result);
 	}
 
+	// stop window from closing
+	int dummy;
+	cin >> dummy;
 	
     return 0;
 }
