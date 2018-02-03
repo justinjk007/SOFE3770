@@ -11,7 +11,7 @@ Deals with this unique problem Dr. Shahryar shared with us. Our
 objective is to draw the biggest line possible in a given island. The
 island is represented as a set of points given.
 
-## [Assignment 2](https://github.com/justinjk007/SOFE3770/tree/master/ParetoEfficiency)
+## [Assignment 2](https://github.com/justinjk007/SOFE3770/tree/master/Assignment2)
 
 This assignment deals with Pareto optimization algorithm used for
 multi-objective optmization problems. We were able to come up with an
